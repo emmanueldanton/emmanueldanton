@@ -173,10 +173,12 @@ img{ display:block; max-width:100%; }
 .nav-right{ display:flex; align-items:center; gap:14px; }
 .nav-burger{ display:none; flex-direction:column; gap:5px; width:44px; height:44px;
   align-items:center; justify-content:center; border:1px solid var(--line); border-radius:12px;
-  background:transparent; cursor:pointer; }
-.nav-burger span{ display:block; width:18px; height:2px; background:var(--ink); transition:transform .3s ease, opacity .2s ease; }
+  background:transparent; cursor:pointer;
+  transition:border-color .25s ease, background .25s ease; }
+.nav-burger span{ display:block; width:18px; height:2px; background:var(--ink); transition:transform .3s ease, opacity .2s ease, scale .2s ease; }
+.nav.open .nav-burger{ border-color:var(--ink); background:rgba(0,0,0,.06); }
 .nav.open .nav-burger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-.nav.open .nav-burger span:nth-child(2){ opacity:0; }
+.nav.open .nav-burger span:nth-child(2){ opacity:0; transform:scaleX(0); }
 .nav.open .nav-burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 .nav-menu{
   display:flex; flex-direction:column;
