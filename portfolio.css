@@ -134,7 +134,7 @@ img{ display:block; max-width:100%; }
   border-bottom:1px solid transparent;
 }
 .nav.scrolled{
-  background:rgba(244,243,239,.82);
+  background:rgba(255,255,255,.94);
   backdrop-filter:saturate(180%) blur(14px);
   border-bottom:1px solid var(--line);
 }
@@ -180,8 +180,9 @@ img{ display:block; max-width:100%; }
 .nav.open .nav-burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 .nav-menu{
   display:none; position:absolute; top:74px; left:0; right:0;
-  background:rgba(244,243,239,.97); backdrop-filter:saturate(180%) blur(14px);
+  background:var(--bg);
   border-bottom:1px solid var(--line); flex-direction:column; padding:10px var(--pad) 22px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 .nav-menu a{ font-family:var(--mono); font-size:13px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--ink-soft); padding:14px 0; border-bottom:1px solid var(--line-soft); }
@@ -549,7 +550,14 @@ button.live{ background:transparent; font-family:var(--mono); font-size:12px; le
   border:1px solid var(--line); border-radius:999px; padding:11px 18px; display:inline-flex; gap:9px; align-items:center;
   cursor:pointer; white-space:nowrap; transition:background .25s ease,color .25s ease,border-color .25s ease; color:var(--ink); }
 .project:hover button.live{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
-@media(max-width:720px){ .project-media{ grid-template-columns:1fr; } .project-top{ flex-direction:column; } }
+@media(max-width:720px){
+  .project-media{ grid-template-columns:1fr; }
+  .project-top{ flex-direction:column; gap:12px; }
+  .project-top .lead{ flex-wrap:wrap; gap:10px; }
+  .project .client{ white-space:normal; word-break:break-word; }
+  .project-foot{ flex-direction:column; align-items:flex-start; }
+  .tags{ overflow:hidden; }
+}
 
 /* ---------- PROJECT DETAIL OVERLAY ---------- */
 .proj-detail-overlay{
@@ -656,7 +664,7 @@ button.live{ background:transparent; font-family:var(--mono); font-size:12px; le
 }
 @media(max-width:680px){
   .about-detail-grid{ grid-template-columns:1fr; }
-  .about-detail-photo{ aspect-ratio:1; max-height:300px; }
+  .about-detail-photo{ aspect-ratio:3/4; max-height:420px; object-position:center top; }
   .about-detail-chips{ grid-template-columns:1fr; }
 }
 
