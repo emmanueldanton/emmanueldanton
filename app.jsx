@@ -1,51 +1,76 @@
 /* global React, ReactDOM */
-const { useState, useEffect } = React;
-const D = window.PORTFOLIO;
+const { useState, useEffect, useRef } = React;
+/* Langue : ?lang=xx, puis choix mémorisé, puis langue du navigateur. Hors français : anglais. */
+const LANGS = ["fr", "en"];
+function pickLang() {
+  var m = /[?&]lang=([a-z]{2})/.exec(window.location.search);
+  if (m && LANGS.indexOf(m[1]) >= 0) { try { localStorage.setItem("lang", m[1]); } catch (e) {} return m[1]; }
+  try { var st = localStorage.getItem("lang"); if (st && LANGS.indexOf(st) >= 0) return st; } catch (e) {}
+  var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "fr"];
+  for (var i = 0; i < list.length; i++) { var c = String(list[i]).slice(0, 2).toLowerCase(); if (LANGS.indexOf(c) >= 0) return c; }
+  return "en";
+}
+const LANG = pickLang();
+document.documentElement.lang = LANG;
+const I18N = (window.PORTFOLIO_I18N || {})[LANG] || null;
+/* fusion : les textes traduits remplacent ceux du français, le reste (liens, images, chiffres) est hérité */
+function mergeLang(base, over) {
+  if (over === undefined || over === null) return base;
+  if (Array.isArray(base)) {
+    if (!Array.isArray(over)) return base;
+    if (base.length && typeof base[0] !== "object") return over;
+    return base.map(function(b, i) { return mergeLang(b, over[i]); });
+  }
+  if (base && typeof base === "object") {
+    var out = {};
+    Object.keys(base).forEach(function(k) { out[k] = mergeLang(base[k], over[k]); });
+    Object.keys(over).forEach(function(k) { if (!(k in out)) out[k] = over[k]; });
+    return out;
+  }
+  return over;
+}
+const D = I18N ? mergeLang(window.PORTFOLIO, I18N.content) : window.PORTFOLIO;
+function tr(str) { return I18N && I18N.ui && I18N.ui[str] ? I18N.ui[str] : str; }
+function switchLang(to) {
+  try { localStorage.setItem("lang", to); } catch (e) {}
+  var u = new URL(window.location.href); u.searchParams.set("lang", to); window.location.href = u.toString();
+}
 
-/* Formspree: créez un compte gratuit sur formspree.io et remplacez ci-dessous */
-const FORMSPREE_ID = "YOUR_FORM_ID";
+/* Le bleu de la photo d'origine est la couleur principale ; index.html?citron montre l'ancienne version */
+const BLEU = !/[?&]citron/.test(window.location.search);
+if (BLEU) document.documentElement.classList.add("t-bleu");
+const ICO3D = BLEU ? "ico3d-apple" : "ico3d";
 
 const NAV = [
-  { id: "apropos", label: "À propos" },
-  { id: "competences", label: "Compétences" },
-  { id: "softskills", label: "Softskills" },
-  { id: "experiences", label: "Expériences" },
-  { id: "projets", label: "Projets" },
-  { id: "formation", label: "Formations" },
+  { id: "apropos", label: tr("À propos") },
+  { id: "competences", label: tr("Compétences") },
+  { id: "softskills", label: tr("Softskills") },
+  { id: "experiences", label: tr("Expériences") },
+  { id: "projets", label: tr("Projets") },
+  { id: "formation", label: tr("Formations") },
 ];
 
-/* ---------- PLACEHOLDER IMAGE SLOT ---------- */
-var PROJ_ICONS = {
-  "01": {
-    main: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><circle cx="11.5" cy="14.5" r="2.5"/><line x1="13.25" y1="16.25" x2="15" y2="18"/></svg>,
-    sec:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>,
-  },
-  "02": {
-    main: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
-    sec:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>,
-  },
-  "03": {
-    main: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>,
-    sec:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
-  },
-  "04": {
-    main: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
-    sec1: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
-    sec2: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>,
-  },
-};
-
-function PlaceholderSlot({ className, icon, label }) {
+/* Titre de section : pastille, phrase courte, un mot dans un bloc de couleur */
+function STitle({ k, c, a, m, z }) {
   return (
-    <div className={"img-slot-ph" + (className ? " " + className : "")}>
-      {icon
-        ? <div className="slot-icon">{icon}</div>
-        : <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      }
-      {label && <span className="slot-label">{label}</span>}
-    </div>
+    <h2 className={"section-title st st--" + c} data-reveal>
+      {a}{a ? " " : ""}<mark>{m}</mark>{z ? " " + z : ""}
+    </h2>
   );
 }
+
+/* Icônes des softskills : une seule famille, même épaisseur de trait */
+const SOFT_ICONS = {
+  eye:    <React.Fragment><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></React.Fragment>,
+  check:  <React.Fragment><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></React.Fragment>,
+  rocket: <React.Fragment><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.900a2.1 2.1 0 0 0-2.9-.1z"/><path d="M12 15 9 12a22 22 0 0 1 2-4 12.9 12.9 0 0 1 11-6c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.5-3 2-4c1.6-1.1 5 0 5 0"/><path d="M12 15v5s3-.5 4-2c1.1-1.6 0-5 0-5"/></React.Fragment>,
+  chat:   <React.Fragment><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.2-4.600A8 8 0 1 1 21 12z"/><path d="M9 11h6"/><path d="M9 14h4"/></React.Fragment>,
+  video:  <React.Fragment><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></React.Fragment>,
+  users:  <React.Fragment><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0"/><path d="M16 4.500a3.5 3.5 0 0 1 0 7"/><path d="M18 14a6.5 6.5 0 0 1 4 6"/></React.Fragment>,
+  spark:  <React.Fragment><path d="M12 3c.6 4.7 2.3 6.4 7 7-4.7.6-6.4 2.3-7 7-.6-4.7-2.3-6.4-7-7 4.7-.6 6.4-2.3 7-7z"/><path d="M19 16v4"/><path d="M17 18h4"/></React.Fragment>,
+  pen:    <React.Fragment><path d="m12 19 7-7 3 3-7 7z"/><path d="m18 13-1.5-7.500L2 2l3.5 14.500L13 18z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></React.Fragment>,
+  globe:  <React.Fragment><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></React.Fragment>,
+};
 
 /* ---------- NAV ---------- */
 function Nav({ scrolled, active, onOpenAbout }) {
@@ -83,8 +108,9 @@ function Nav({ scrolled, active, onOpenAbout }) {
           ))}
         </div>
         <div className="nav-right">
-          <a href={D.cv} download className="nav-cta">Mon CV <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-          <button className="nav-burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
+          <button type="button" className="nav-lang" aria-label={tr("Langue")} onClick={function() { switchLang(LANG === "fr" ? "en" : "fr"); }}>{LANG === "fr" ? "EN" : "FR"}</button>
+          <a href={D.cv} download className="nav-cta">{tr("Mon CV")} <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+          <button className="nav-burger" aria-label={tr("Menu")} aria-expanded={open} onClick={() => setOpen(!open)}>
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -93,51 +119,69 @@ function Nav({ scrolled, active, onOpenAbout }) {
         {NAV.map((n) => (
           <a key={n.id} href={"#" + n.id} className={active === n.id ? "active" : ""} onClick={(e) => handleLink(e, n.id)}>{n.label}</a>
         ))}
-        <a href="#contact" onClick={(e) => handleLink(e, 'contact')}>Contact</a>
+        <a href="#contact" onClick={(e) => handleLink(e, 'contact')}>{tr("Contact")}</a>
       </div>
     </nav>
   );
 }
 
+
 /* ---------- HERO ---------- */
 function Hero({ onOpenAbout }) {
-  useEffect(function() {
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+  var half = Math.ceil(D.lastName.length / 2);
+  var T = D.hero.tags;
 
-    function onMove(e) {
-      var giant = document.querySelector('.hero-giant');
-      var visual = document.querySelector('.hero-center-visual');
-      if (!giant || !visual) return;
-      var x = window.innerWidth / 2 - e.clientX;
-      var y = window.innerHeight / 2 - e.clientY;
-      giant.style.transform =
-        'translate(calc(-50% + ' + (x / 40) + 'px), calc(-50% + ' + (y / 40) + 'px))';
-      visual.style.transform =
-        'translate(calc(-50% + ' + (-x / 25) + 'px), calc(-50% + ' + (-y / 25) + 'px))';
-    }
+  function goProjets() {
+    var el = document.getElementById('projets');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
 
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return function() { window.removeEventListener('mousemove', onMove); };
-  }, []);
+  var spark = "M50 0c4 30 16 42 50 50-34 8-46 20-50 50-4-30-16-42-50-50C34 42 46 30 50 0z";
 
   return (
     <React.Fragment>
-      <section className="hero-fluid" id="top">
-        {/* Titre géant en arrière-plan ·parallaxe couche 1 */}
-        <h1 className="hero-giant">
-          <span>{D.firstName}</span>
-          <span>{D.lastName}</span>
+      <section className="hx" id="top">
+        <h1 className="hx-giant" aria-label={D.name}>
+          <span aria-hidden="true">{D.firstName}</span>
+          <span className="hx-l2" aria-hidden="true">
+            <b>{D.lastName.slice(0, half)}</b><b>{D.lastName.slice(half)}</b>
+          </span>
         </h1>
 
-        {/* Barre inférieure ·description + boutons */}
-        <div className="hero-bottom-bar">
-          <div className="wrap hero-bottom-inner">
-            <p className="hero-lead-text">{D.hero.lead}</p>
-            <div className="hero-actions-bottom">
-              <button className="btn btn-primary" onClick={onOpenAbout}>En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></button>
+        <div className="wrap hx-stage">
+          <div className="hx-copy">
+            <p className="hx-mission">{D.hero.mission}</p>
+            <p className="hx-lead">{D.hero.lead}</p>
+          </div>
+
+          <div className="hx-figure">
+            <div className="hx-disc"></div>
+            <div className="hx-cut"><img src="assets/photos/hero-detoure.webp" alt={D.hero.photoAlt} /></div>
+            {BLEU ? <img className="hx-spark hx-spark--1" src="assets/photos/etoile-3d.webp" alt="" /> : <svg className="hx-spark hx-spark--1" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
+            {BLEU ? <img className="hx-spark hx-spark--2" src="assets/photos/etoile-3d.webp" alt="" /> : <svg className="hx-spark hx-spark--2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
+          </div>
+
+          <div className="hx-tags">
+            <div className="hx-chip hx-chip--a">
+              <div className="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/></svg></div>
+              <div><div className="v">{T.poste.v}</div><div className="k"><span className="hx-live"></span>{T.poste.k}</div></div>
+            </div>
+            <div className="hx-chip hx-chip--b">
+              <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></i>
+              {T.capteurs}
+            </div>
+            <div className="hx-chip hx-chip--c">
+              <div><div className="v">{T.ventes.v}</div><div className="k">{T.ventes.k}</div></div>
+              <div className="hx-bars" aria-hidden="true"><b style={{ height: "30%" }}></b><b style={{ height: "48%" }}></b><b style={{ height: "40%" }}></b><b style={{ height: "68%" }}></b><b style={{ height: "100%" }}></b></div>
             </div>
           </div>
+        </div>
+
+        <div className="wrap">
+        <div className="hx-actions">
+          <button className="hx-btn hx-btn--accent" onClick={goProjets}>{tr("Voir mes projets")} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></button>
+          <button className="hx-btn" onClick={onOpenAbout}>{tr("En savoir plus")} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></button>
+        </div>
         </div>
       </section>
 
@@ -145,31 +189,11 @@ function Hero({ onOpenAbout }) {
       <div className="hero-marquee">
         <div className="track">
           {[0, 1].map(function(k) {
-            return <span key={k}>PYTHON · SQL · NODE.JS · POWER BI · DASH · STREAMLIT · MACHINE LEARNING · NLP · n8n · WEB SCRAPING · PROMPT ENGINEERING · DOCKER · GCP · API REST · SUPABASE · DATA STORYTELLING&nbsp;</span>;
+            return <span key={k} aria-hidden={k === 1}>{D.marquee.map(function(t) { return <b key={t}>{t}</b>; })}</span>;
           })}
         </div>
       </div>
     </React.Fragment>
-  );
-}
-
-/* ---------- STATS BAND ---------- */
-function StatsBand() {
-  return (
-    <div className="statsband">
-      <div className="wrap statsband-grid">
-        {D.stats.map((s, i) => (
-          <div className="sb-cell" key={i} data-reveal style={{ "--d": i * 70 + "ms" }}>
-            <div className="sb-num">
-              {(s.u === "+" || s.u === "<") && <span className="u">{s.u}</span>}
-              {s.num}
-              {s.u !== "+" && s.u !== "<" && s.u && <span className="u">{s.u}</span>}
-            </div>
-            <div className="sb-lbl">{s.lbl}</div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -178,7 +202,7 @@ function About() {
   return (
     <section className="section" id="apropos">
       <div className="wrap">
-        <h2 className="section-title" data-reveal>À propos</h2>
+        <STitle k={tr("À propos")} c="lime" a={tr("Moi, c'est")} m={tr("Emmanuel")} />
         <div className="about-grid">
           <div>
             <p data-reveal dangerouslySetInnerHTML={{ __html: D.about.p1 }}></p>
@@ -186,7 +210,7 @@ function About() {
             <p data-reveal style={{ "--d": "160ms" }} dangerouslySetInnerHTML={{ __html: D.about.p3 }}></p>
           </div>
           <div>
-            <img src="assets/portrait.jpg" alt={D.name} className="about-photo" data-reveal style={{ "--d": "60ms" }} />
+            <img src="assets/portrait.webp" alt={D.name} className="about-photo" data-reveal style={{ "--d": "60ms" }} />
             <div className="chips" data-reveal style={{ "--d": "120ms" }}>
               {D.about.chips.map((c, i) => (
                 <div className="chip" key={i}>
@@ -204,84 +228,110 @@ function About() {
 
 /* ---------- SKILLS ---------- */
 function Skills() {
+  const COLORS = ["lime", "blue", "yellow", "violet", "rose"];
+  const [act, setAct] = useState(3);
+  var n = D.skills.length;
+
   return (
     <section className="section alt" id="competences">
       <div className="wrap">
-        <h2 className="section-title" data-reveal>Compétences</h2>
-        <div className="skills">
-          {D.skills.map((s, i) => (
-            <div className="skill" key={i} data-reveal style={{ "--d": i * 45 + "ms" }}>
-              <div className="n">{s.n}</div>
-              <div>
-                <div className="t">{s.t}</div>
-                <div className="tags">{s.tags.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
-              </div>
-              <div className="d">{s.d}</div>
-            </div>
-          ))}
+        <STitle k={tr("Compétences")} c="lime" a={tr("Ce que je sais")} m={tr("faire")} />
+        <div className="skx" data-reveal>
+          <ul className="skx-list">
+            {D.skills.map(function(sk, i) {
+              return (
+                <li key={i} className={"skx-it skx--" + COLORS[i % COLORS.length] + (i === act ? " is-on" : "")}>
+                  <button type="button" className="skx-btn" aria-expanded={i === act}
+                    onMouseEnter={function() { setAct(i); }} onFocus={function() { setAct(i); }} onClick={function() { setAct(i); }}>
+                    <span className="skx-n">{sk.n}</span><span className="skx-t">{sk.t}</span>
+                  </button>
+                  <div className="skx-in">
+                    <p>{sk.d}</p>
+                    <div className="skx-tags">{sk.tags.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          {/* jeu de cartes : la carte active est dessus, les suivantes dépassent derrière */}
+          <div className="skx-deck" aria-hidden="true">
+            {D.skills.map(function(sk, i) {
+              var p = (i - act + n) % n;
+              return (
+                <div key={i} className={"skx-card skx--" + COLORS[i % COLORS.length] + " p" + Math.min(p, 3) + (p === 0 ? " is-top" : "")} style={{ zIndex: n - p }}>
+                  <div className="skx-card-top"><span className="skx-card-n">{sk.n}</span><span className="skx-card-t">{sk.t}</span></div>
+                  <p>{sk.d}</p>
+                  <div className="skx-tags">{sk.tags.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- SOFT SKILLS + TESTIMONIAL ---------- */
+/* ---------- SOFT SKILLS + TÉMOIGNAGE ---------- */
+const PAL = ["lime", "blue", "yellow", "violet", "rose"];
+const TILT = [-4, 3, -2, 5, -3, 2, -5, 4, -1];
+
 function SoftSkills() {
   const t = D.testimonial;
   return (
     <section className="section" id="softskills">
       <div className="wrap">
-        <h2 className="section-title" data-reveal>Softskills</h2>
-        <div className="softgrid">
-          {D.softSkills.map((s, i) => (
-            <div className="soft" key={i} data-reveal style={{ "--d": i * 55 + "ms" }}>
-              <div className="soft-n">{String(i + 1).padStart(2, "0")}</div>
-              <div className="soft-t">{s.t}</div>
-              <div className="soft-d">{s.d}</div>
-            </div>
-          ))}
+        <STitle k={tr("Softskills")} c="blue" a={tr("Comment je")} m={tr("travaille")} />
+        <div className="sb-grid">
+          <figure className="sb-quote" data-reveal>
+            <span className="sb-q" aria-hidden="true">”</span>
+            <blockquote>{t.q}</blockquote>
+            <figcaption>
+              <img src={t.photo} alt="" loading="lazy" />
+              <div>
+                <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <span aria-hidden="true">↗</span></a>
+                <span>{t.rl}</span>
+              </div>
+            </figcaption>
+          </figure>
+          <ul className="sb-tiles">
+            {D.softSkills.map((s, i) => (
+              <li key={i} data-reveal style={{ "--d": 60 + i * 50 + "ms" }}>
+                <img className="sb-3d" src={"assets/" + ICO3D + "/" + s.ico + ".webp"} alt="" loading="lazy" width="96" height="96" />
+                <b>{s.t}</b>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <figure className="tfeature" data-reveal>
-          <div className="qmark">”</div>
-          <blockquote>{t.q}</blockquote>
-          <figcaption className="who">
-            <a href={t.li} target="_blank" rel="noopener noreferrer" className="who-avatar-link" aria-label={"Voir le profil LinkedIn de " + t.nm}>
-              <img src={t.photo} alt={t.nm} className="who-avatar" />
-            </a>
-            <div>
-              <a href={t.li} target="_blank" rel="noopener noreferrer" className="nm nm-link">
-                {t.nm}
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{marginLeft:"5px",verticalAlign:"middle",opacity:.7}}><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <div className="rl">{t.rl}</div>
-              <div className="meta">{t.meta}</div>
-            </div>
-          </figcaption>
-        </figure>
       </div>
     </section>
   );
 }
 
-/* ---------- DETAIL FOOTER (shared) ---------- */
-function DetailFooter() {
+/* ---------- FENÊTRES DE DÉTAIL (commun) ---------- */
+function DetailEnd({ next }) {
   return (
-    <footer className="detail-footer">
-      <div className="detail-footer-inner">
-        <span className="detail-footer-brand"><span className="dot"></span>{D.name}</span>
-        <div className="detail-footer-links">
-          <a href={"mailto:" + D.email}>{D.email}</a>
-          <a href={D.cv} download>Télécharger CV</a>
+    <footer className="dw-end">
+      <div className="dw-end-in">
+        <button type="button" className="dw-next" onClick={next.go}>
+          <span className="dw-next-k">{next.k}</span>
+          <span className="dw-next-t">{next.label}</span>
+          <span className="dw-next-go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </span>
+        </button>
+        <div className="dw-end-bot">
+          <span>© 2026 {D.name}</span>
+          <span>
+            <a href={D.cv} download>{tr("Mon CV")} ↓</a>
+          </span>
         </div>
-        <span className="detail-footer-copy">© 2026 · Data Analyst & BI</span>
       </div>
     </footer>
   );
 }
 
-/* ---------- EXPERIENCE DETAIL OVERLAY ---------- */
-function ExperienceDetail({ x, onClose }) {
+function useOverlay(onClose) {
   useEffect(function() {
     function onKey(e) { if (e.key === 'Escape') onClose(); }
     document.addEventListener('keydown', onKey);
@@ -293,210 +343,242 @@ function ExperienceDetail({ x, onClose }) {
       document.body.style.overflow = '';
     };
   }, []);
-  var d = x.detail;
+}
+
+function Gallery({ items }) {
+  if (!items || items.length === 0) return null;
   return (
-    <div className="proj-detail-overlay" role="dialog" aria-modal="true" aria-label={"Détails — " + x.role + " chez " + x.co}>
-      <div className="proj-detail-inner proj-detail-inner--noPad">
-        <div className={"xpd-hero" + (x.live ? " xpd-hero--live" : "")}>
-          <div className="xpd-hero-topbar">
-            <button className="proj-detail-back xpd-back" onClick={onClose} aria-label="Fermer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              Retour
-            </button>
-          </div>
-          <div className="xpd-hero-body">
-            {x.logo && <img src={x.logo} alt={x.co} className="xpd-hero-logo" />}
-            <div className="xpd-hero-info">
-              {x.live && <div className="xpd-live-badge"><span className="live"></span>Poste actuel · En cours</div>}
-              <h2 className="xpd-hero-role">{x.role}</h2>
-              <div className="xpd-hero-meta">
-                <span>{x.co}</span><span className="xpd-sep">·</span>
-                <span>{x.yr}</span><span className="xpd-sep">·</span>
-                <span>{x.ph}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="xpd-content">
-          <div className="proj-detail-brief-grid">
-            <div className="proj-detail-brief-block">
-              <h4>Mission</h4>
-              <p>{d.brief}</p>
-            </div>
-            <div className="proj-detail-brief-block">
-              <h4>Mon rôle</h4>
-              <p>{d.role}</p>
-            </div>
-            <div className="proj-detail-brief-block">
-              <h4>Résultat</h4>
-              <p>{d.result}</p>
-            </div>
-          </div>
-
-          <p className="proj-detail-steps-label">Déroulé</p>
-          <div className="proj-detail-steps">
-            {d.steps.map(function(s) {
-              return (
-                <div className="proj-detail-step" key={s.n}>
-                  <div className="proj-detail-step-n" aria-hidden="true">{s.n}</div>
-                  <h4>{s.title}</h4>
-                  <p>{s.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="tags" style={{marginTop:"32px"}}>{x.tags.map(function(t) { return <span className="tag" key={t}>{t}</span>; })}</div>
-        </div>
-
-        <DetailFooter />
+    <React.Fragment>
+      <h3 className="dw-sub">{tr("En images")}</h3>
+      <div className={"dw-gal dw-gal--" + items.length}>
+        {items.map(function(g) {
+          return (
+            <figure key={g.src} className={g.contain ? "is-contain" : ""}>
+              <img src={g.src} alt={g.alt} loading="lazy" style={g.pos ? { objectPosition: g.pos } : undefined} />
+              {g.cap && <figcaption>{g.cap}</figcaption>}
+            </figure>
+          );
+        })}
       </div>
+    </React.Fragment>
+  );
+}
+
+function DetailWindow({ aria, back, counter, color, k, title, tags, panel, d, stepsLabel, quote, cta, next, logo, onClose }) {
+  useOverlay(onClose);
+  return (
+    <div className="proj-detail-overlay dw" role="dialog" aria-modal="true" aria-label={aria}>
+      <div className={"dw-in c-" + color}>
+        <div className="dw-top">
+          <button type="button" className="dw-back" onClick={onClose}><span aria-hidden="true">←</span> {back}</button>
+        </div>
+
+        <header className="dw-head">
+          <div className="dw-intro">
+            {logo && <span className="dw-mark"><img src={logo} alt="" /></span>}
+            <p className="dw-over">{k}</p>
+            <h2 className="dw-title">{title}</h2>
+            <p className="dw-lead">{d.brief}</p>
+            <div className="dw-tags">{tags.map(function(t) { return <span className="tag" key={t}>{t}</span>; })}</div>
+          </div>
+          {panel}
+        </header>
+
+        {d.facts && (
+          <ul className="dw-facts">
+            {d.facts.map(function(f) { return <li key={f.k}><b>{f.v}</b><span>{f.k}</span></li>; })}
+          </ul>
+        )}
+
+        <div className="dw-duo">
+          <div className="dw-card"><h3>{tr("Mon rôle")}</h3><p>{d.role}</p></div>
+          <div className="dw-card dw-card--k"><h3>{tr("Le résultat")}</h3><p>{d.result}</p></div>
+        </div>
+
+        <h3 className="dw-sub">{stepsLabel}</h3>
+        <ol className="dw-steps">
+          {d.steps.map(function(s) {
+            return (
+              <li key={s.n}>
+                <span className="dw-n" aria-hidden="true">{s.n}</span>
+                <div><h4>{s.title}</h4><p>{s.desc}</p></div>
+              </li>
+            );
+          })}
+        </ol>
+
+        {quote}
+        <Gallery items={d.gallery} />
+
+        <div className="dw-cta">{cta}</div>
+      </div>
+      <DetailEnd next={next} />
     </div>
   );
 }
 
+/* ---------- EXPERIENCE DETAIL OVERLAY ---------- */
+function ExperienceDetail({ x, i, onClose, onNext }) {
+  var nx = D.experience[(i + 1) % D.experience.length];
+  var parts = x.co.split(" · ");
+  var t = D.testimonial;
+  var panel = (
+    <div className="dw-panel dw-panel--xp">
+      <span className="dw-badge">{x.live ? tr("En poste") : x.ph}</span>
+      <div className="dw-xp-mid">
+        {x.logo && <span className="dw-logo"><img src={x.logo} alt="" /></span>}
+        <b className="dw-co">{parts[0]}</b>
+      </div>
+      <span className="dw-when">{x.yr}{parts[1] ? " · " + parts[1] : ""}</span>
+    </div>
+  );
+  var quote = x.detail.quote ? (
+    <React.Fragment>
+      <h3 className="dw-sub">{tr("Ce qu'en dit ma responsable")}</h3>
+      <figure className="sb-quote dw-quote">
+        <span className="sb-q" aria-hidden="true">”</span>
+        <blockquote>{t.q}</blockquote>
+        <figcaption>
+          <img src={t.photo} alt="" loading="lazy" />
+          <div>
+            <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <span aria-hidden="true">↗</span></a>
+            <span>{t.rl}</span>
+          </div>
+        </figcaption>
+      </figure>
+    </React.Fragment>
+  ) : null;
+  return (
+    <DetailWindow
+      aria={tr("Détails : ") + x.role + tr(" chez ") + x.co}
+      back={tr("Retour aux expériences")}
+      counter={String(i + 1).padStart(2, "0") + " / " + String(D.experience.length).padStart(2, "0")}
+      color={XP_PAL[i % XP_PAL.length]}
+      k={parts[0] + " · " + x.ph}
+      title={x.role}
+      tags={x.tags}
+      panel={panel}
+      d={x.detail}
+      stepsLabel={tr("Comment ça s'est passé")}
+      quote={quote}
+      cta={<a href="#contact" className="dw-btn dw-btn--main" onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>}
+      next={{ k: tr("Expérience suivante"), label: nx.co.split(" · ")[0], go: onNext }}
+      onClose={onClose}
+    />
+  );
+}
+
 /* ---------- EXPERIENCE ---------- */
+const XP_PAL = ["lime", "blue", "yellow"];
+
 function Experience() {
   var [openIdx, setOpenIdx] = useState(null);
+  var [act, setAct] = useState(0);
   var openXp = openIdx !== null ? D.experience[openIdx] : null;
   return (
     <section className="section alt" id="experiences">
       <div className="wrap">
-        <h2 className="section-title" data-reveal>Expériences</h2>
-        <div className="ns-stack">
+        <STitle k={tr("Expériences")} c="violet" a={tr("Où j'ai")} m={tr("travaillé")} />
+        <div className="xb">
           {D.experience.map(function(x, i) {
+            var parts = x.co.split(" · ");
+            var on = act === i;
             return (
-              <div className={"nextstage" + (x.live ? " nextstage--live" : "")} key={i} data-reveal style={{ "--d": i * 80 + "ms" }}>
-                <div className="ns-main">
-                  {x.logo && <img src={x.logo} alt={x.co} className="ns-logo" />}
-                  {x.live && <div className="ns-badge"><span className="live"></span>Poste actuel · En cours</div>}
-                  <h3 className="ns-title">{x.role}</h3>
-                  <p className="ns-desc">{x.detail && x.detail.brief}</p>
-                  <div className="tags ns-tags">{x.tags.map(function(t) { return <span className="tag" key={t}>{t}</span>; })}</div>
+              <div key={i} data-reveal style={{ "--d": i * 80 + "ms" }}>
+              <article
+                className={"xb-row c-" + XP_PAL[i % XP_PAL.length] + (on ? " is-open" : "")}
+                tabIndex={0}
+                onMouseEnter={function() { setAct(i); }}
+                onFocus={function() { setAct(i); }}
+                onClick={function() { setAct(i); }}
+              >
+                <div className="xb-line">
+                  <span className="xb-when">{x.yr}</span>
+                  <h3>{x.role}</h3>
+                  <span className="xb-co">{parts[0]}{x.live && <i>{tr("En poste")}</i>}</span>
                 </div>
-                <div className="ns-date">
-                  <div className="ns-date-l">Période</div>
-                  <div className="ns-date-v">{x.yr}</div>
-                  <div className="ns-date-s">{x.ph} · {x.co.split(" · ")[0]}</div>
-                  {x.detail && <button className="xp-detail-btn" style={{marginTop:"auto", alignSelf:"flex-end"}} onClick={function() { setOpenIdx(i); }}>Détails <span>→</span></button>}
+                <div className="xb-more">
+                  <div>
+                    <ul>
+                      {x.bullets.map(function(b) { return <li key={b}>{b}</li>; })}
+                    </ul>
+                    <div className="xb-foot">
+                      <div className="xb-tags">{x.tags.slice(0, 5).map(function(t) { return <span className="tag" key={t}>{t}</span>; })}</div>
+                      {x.detail && <button type="button" className="xb-btn" tabIndex={on ? 0 : -1} onClick={function() { setOpenIdx(i); }}>{tr("Détails")} <span aria-hidden="true">→</span></button>}
+                    </div>
+                  </div>
                 </div>
+              </article>
               </div>
             );
           })}
         </div>
       </div>
-      {openXp && <ExperienceDetail x={openXp} onClose={function() { setOpenIdx(null); }} />}
+      {openXp && <ExperienceDetail key={openIdx} x={openXp} i={openIdx} onClose={function() { setOpenIdx(null); }} onNext={function() { setOpenIdx((openIdx + 1) % D.experience.length); }} />}
     </section>
   );
 }
 
 /* ---------- PROJECT DETAIL OVERLAY ---------- */
-function ProjectDetail({ p, onClose }) {
-  useEffect(function() {
-    function onKey(e) { if (e.key === 'Escape') onClose(); }
-    document.addEventListener('keydown', onKey);
-    window.addEventListener('nav:close-overlay', onClose);
-    document.body.style.overflow = 'hidden';
-    return function() {
-      document.removeEventListener('keydown', onKey);
-      window.removeEventListener('nav:close-overlay', onClose);
-      document.body.style.overflow = '';
-    };
-  }, []);
-
-  var d = p.detail;
-  var total = String(D.projects.length).padStart(2, '0');
-  return (
-    <div className="proj-detail-overlay" role="dialog" aria-modal="true" aria-label={"Détails du projet " + p.title}>
-      <div className="proj-detail-inner">
-        <div className="proj-detail-topbar">
-          <button className="proj-detail-back" onClick={onClose} aria-label="Retour aux projets">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            Retour aux projets
-          </button>
-          <span className="proj-detail-pn">{p.pn} / {total}</span>
-        </div>
-
-        <h2 className="proj-detail-title">{p.title}</h2>
-        <div className="proj-detail-tags">
-          {p.tags.map(function(t) { return <span className="tag" key={t}>{t}</span>; })}
-        </div>
-
-        <div className="proj-detail-brief-grid">
-          <div className="proj-detail-brief-block">
-            <h4>Mission</h4>
-            <p>{d.brief}</p>
-          </div>
-          <div className="proj-detail-brief-block">
-            <h4>Mon rôle</h4>
-            <p>{d.role}</p>
-          </div>
-          <div className="proj-detail-brief-block">
-            <h4>Résultat</h4>
-            <p>{d.result}</p>
-          </div>
-        </div>
-
-        <p className="proj-detail-steps-label">Conception</p>
-        <div className="proj-detail-steps">
-          {d.steps.map(function(s) {
-            return (
-              <div className="proj-detail-step" key={s.n}>
-                <div className="proj-detail-step-n" aria-hidden="true">{s.n}</div>
-                <h4>{s.title}</h4>
-                <p>{s.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        {p.url
-          ? <a href={p.url} target="_blank" rel="noreferrer" className="btn btn-primary">Voir le projet <span className="arr">↗</span></a>
-          : <a href="#contact" className="btn btn-ghost" onClick={onClose}>Prendre contact <span className="arr">↗</span></a>
-        }
-        <DetailFooter />
-      </div>
+function ProjectDetail({ p, onClose, onNext }) {
+  var m = p.media || [];
+  var i = D.projects.indexOf(p);
+  var nx = D.projects[(i + 1) % D.projects.length];
+  var panel = (
+    <div className="dw-panel">
+      {m[0] && <img className="dw-img" src={m[0].src} alt={m[0].alt} />}
+      {m[1] && <img className={"dw-img2" + (m[1].contain ? " is-phone" : "")} src={m[1].src} alt={m[1].alt} style={m[1].pos ? { objectPosition: m[1].pos } : undefined} />}
     </div>
+  );
+  return (
+    <DetailWindow
+      aria={tr("Détails du projet ") + p.title}
+      back={tr("Retour aux projets")}
+      counter={p.pn + " / " + String(D.projects.length).padStart(2, "0")}
+      color={PAL[i % PAL.length]}
+      k={p.client}
+      logo={p.logo}
+      title={p.title}
+      tags={p.tags}
+      panel={panel}
+      d={p.detail}
+      stepsLabel={tr("Comment je m'y suis pris")}
+      cta={
+        <React.Fragment>
+          {p.url && <a href={p.url} target="_blank" rel="noreferrer" className="dw-btn dw-btn--main">{tr("Voir le projet")} <span aria-hidden="true">↗</span></a>}
+          <a href="#contact" className={"dw-btn" + (p.url ? "" : " dw-btn--main")} onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>
+        </React.Fragment>
+      }
+      next={{ k: tr("Projet suivant"), label: nx.title.split(",")[0], go: function() { onNext(nx.pn); } }}
+      onClose={onClose}
+    />
   );
 }
 
 /* ---------- PROJECTS ---------- */
 function Project({ p, i, onOpen }) {
+  var m = p.media || [];
+  var phone = m[1] && m[1].contain;
+  var shot = phone ? m[1] : m[0];
+  var cut = p.title.indexOf(",");
+  var name = cut > 0 ? p.title.slice(0, cut) : p.title;
+  var sub = cut > 0 ? p.title.slice(cut + 1).trim() : "";
+  sub = sub.charAt(0).toUpperCase() + sub.slice(1);
   return (
-    <article className="project" data-reveal style={{ "--d": (i % 2) * 60 + "ms" }}>
-      <div className="project-top">
-        <div className="lead">
-          <span className="pn">{p.pn}</span>
-          <div>
-            <div className="client">{p.client}</div>
-            <h3 className="ptitle">{p.title}</h3>
-          </div>
+    <article className={"pb-card pb--" + i} data-reveal style={{ "--d": i * 80 + "ms" }} onClick={function() { onOpen(p.pn); }}>
+      <div className="pb-head">
+        <span className="pb-n">{p.pn}</span>
+        <button type="button" className="pb-go" aria-label={tr("Voir les détails du projet ") + name}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </button>
+      </div>
+      <h3>{name}</h3>
+      {sub && <p>{sub}</p>}
+      {shot && (
+        <div className={"pb-shot" + (phone ? " is-phone" : "")}>
+          <img src={shot.src} alt={shot.alt} loading="lazy" />
         </div>
-        <div className="project-actions">
-          {p.url && (
-            <a href={p.url} className="live" target="_blank" rel="noreferrer">Voir le projet <span>↗</span></a>
-          )}
-          <button className="live" onClick={function() { onOpen(p.pn); }}>Conception <span>→</span></button>
-        </div>
-      </div>
-      <div className="project-media">
-        <PlaceholderSlot className="big" icon={PROJ_ICONS[p.pn] && PROJ_ICONS[p.pn].main} label="Aperçu à venir" />
-        {p.slots === 3 ? (
-          <div className="col">
-            <PlaceholderSlot icon={PROJ_ICONS[p.pn] && PROJ_ICONS[p.pn].sec1} />
-            <PlaceholderSlot icon={PROJ_ICONS[p.pn] && PROJ_ICONS[p.pn].sec2} />
-          </div>
-        ) : (
-          <div className="col">
-            <PlaceholderSlot icon={PROJ_ICONS[p.pn] && PROJ_ICONS[p.pn].sec} />
-          </div>
-        )}
-      </div>
-      <div className="project-foot">
-        <p className="desc">{p.desc}</p>
-        <div className="tags">{p.tags.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
-      </div>
+      )}
     </article>
   );
 }
@@ -509,235 +591,184 @@ function Projects() {
     <React.Fragment>
       <section className="section" id="projets">
         <div className="wrap">
-          <h2 className="section-title" data-reveal>Projets</h2>
-          <div className="projects">
+          <STitle k={tr("Projets")} c="rose" a={tr("Ce que j'ai")} m={tr("construit")} />
+          <div className="pb">
             {D.projects.map(function(p, i) {
               return <Project key={p.pn} p={p} i={i} onOpen={setOpenPn} />;
             })}
           </div>
         </div>
       </section>
-      {openProject && <ProjectDetail p={openProject} onClose={function() { setOpenPn(null); }} />}
+      {openProject && <ProjectDetail key={openPn} p={openProject} onClose={function() { setOpenPn(null); }} onNext={setOpenPn} />}
     </React.Fragment>
   );
 }
 
-/* ---------- FORMATION ---------- */
+/* ---------- FORMATION : frise dans l'ordre du temps ---------- */
 function Formation() {
+  var list = D.education.slice().reverse();
   return (
     <section className="section alt" id="formation">
       <div className="wrap">
-        <h2 className="section-title" data-reveal>Formations</h2>
-        <div className="edugrid">
-          {D.education.map((e, i) => (
-            <div className="edu" key={i} data-reveal style={{ "--d": i * 70 + "ms" }}>
-              <div className="edu-top">
-                <span className="edu-yr">{e.yr}</span>
-                <span className="edu-country">{e.country}</span>
-              </div>
-              {e.logo && <img src={e.logo} alt={e.sch} className="edu-logo" />}
-              <div className="edu-deg">{e.deg}</div>
-              <div className="edu-sch">{e.sch}</div>
-            </div>
-          ))}
+        <STitle k={tr("Formations")} c="lime" a={tr("Où j'ai")} m={tr("appris")} />
+        <div className="eb">
+          {list.map(function(e, i) {
+            var now = i === list.length - 1;
+            return (
+              <article className={"eb-stop" + (now ? " is-now" : "")} key={i} data-reveal style={{ "--d": i * 120 + "ms" }}>
+                <span className="eb-dot" aria-hidden="true"></span>
+                <span className="eb-yr">{e.yr}</span>
+                {e.logo && <span className="eb-logo"><img src={e.logo} alt="" loading="lazy" /></span>}
+                <h3>{e.deg}</h3>
+                <p>{e.sch}</p>
+                {now && <span className="eb-now">{tr("En cours")}</span>}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- CONTACT + FOOTER ---------- */
-const SHAPES = [
-  { cls: "cross",   color: "var(--c-pink)"   },
-  { cls: "dot",     color: "var(--c-lime)"   },
-  { cls: "diamond", color: "var(--c-purple)" },
-  { cls: "ring",    color: "var(--c-orange)" },
-  { cls: "dot",     color: "var(--c-green)"  },
-  { cls: "tri",     color: "var(--c-pink)"   },
-  { cls: "diamond", color: "var(--c-orange)" },
-  { cls: "ring",    color: "var(--c-purple)" },
+/* ---------- CONTACT + PIED DE PAGE ---------- */
+const FOOT_NAV = [
+  { id: "competences", label: tr("Compétences") },
+  { id: "softskills", label: tr("Softskills") },
+  { id: "experiences", label: tr("Expériences") },
+  { id: "projets", label: tr("Projets") },
+  { id: "formation", label: tr("Formations") },
+  { id: "contact", label: tr("Contact") },
 ];
 
-function Shape({ s }) {
-  if (s.cls === "tri") return <span className="shape tri" style={{ borderBottomColor: s.color }}></span>;
-  if (s.cls === "ring") return <span className="shape ring" style={{ borderColor: s.color }}></span>;
-  if (s.cls === "cross") return <span className="shape cross" style={{ "--bar": s.color }}></span>;
-  return <span className={"shape " + s.cls} style={{ background: s.color }}></span>;
+/* Logos officiels (tracés Simple Icons) */
+const LOGO_LINKEDIN = <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>;
+const LOGO_GITHUB = <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>;
+
+/* Formulaire de contact.
+   Avec une clé Web3Forms (web3forms.com, gratuit), le message part directement et l'adresse reste invisible.
+   Sans clé, le bouton ouvre la messagerie du visiteur avec l'objet et le texte déjà remplis. */
+const FORM_KEY = "";
+
+function ContactForm() {
+  const [f, setF] = useState({ email: "", subject: "", message: "" });
+  const [state, setState] = useState("idle");
+  const set = function(k) { return function(e) { var n = Object.assign({}, f); n[k] = e.target.value; setF(n); }; };
+  function submit(e) {
+    e.preventDefault();
+    if (!FORM_KEY) {
+      window.location.href = "mailto:" + D.email + "?subject=" + encodeURIComponent(f.subject) + "&body=" + encodeURIComponent(f.message + (f.email ? "\n\n" + f.email : ""));
+      return;
+    }
+    setState("sending");
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ access_key: FORM_KEY, subject: f.subject, email: f.email, message: f.message, from_name: "Portfolio" }),
+    }).then(function(r) { setState(r.ok ? "sent" : "error"); }).catch(function() { setState("error"); });
+  }
+  if (state === "sent") return <div className="kb-form kb-form--ok" role="status"><b>{tr("Message envoyé.")}</b><span>{tr("Merci, je vous réponds vite.")}</span></div>;
+  return (
+    <form className="kb-form" onSubmit={submit}>
+      <label>{tr("Votre e-mail")}<input type="email" required autoComplete="email" value={f.email} onChange={set("email")} placeholder="vous@exemple.com" /></label>
+      <label>{tr("Objet")}<input type="text" required value={f.subject} onChange={set("subject")} placeholder={tr("De quoi voulez-vous parler ?")} /></label>
+      <label>{tr("Message")}<textarea rows="4" required value={f.message} onChange={set("message")} placeholder={tr("Bonjour Emmanuel,")}></textarea></label>
+      <button type="submit" className="kb-send" disabled={state === "sending"}>{state === "sending" ? tr("Envoi…") : tr("Envoyer")} <span aria-hidden="true">↗</span></button>
+      {state === "error" && <p className="kb-err" role="alert">{tr("L'envoi a échoué. Réessayez dans un instant.")}</p>}
+    </form>
+  );
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [submitError, setSubmitError] = useState(null);
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
-  const submit = (e) => {
-    e.preventDefault();
-    const er = {};
-    if (!form.name.trim()) er.name = "Votre nom est requis";
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) er.email = "Email invalide";
-    if (form.message.trim().length < 10) er.message = "Quelques mots de plus ?";
-    setErrors(er);
-    if (Object.keys(er).length > 0) return;
-    setLoading(true);
-    setSubmitError(null);
-    fetch("https://formspree.io/f/" + FORMSPREE_ID, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ name: form.name, _replyto: form.email, message: form.message }),
-    })
-      .then(function(res) {
-        if (res.ok) { setSent(true); }
-        else { setSubmitError("Erreur lors de l'envoi. Écrivez-moi directement par email."); }
-      })
-      .catch(function() {
-        setSubmitError("Connexion impossible. Écrivez-moi directement par email.");
-      })
-      .finally(function() { setLoading(false); });
-  };
-
   return (
-    <section className="contact" id="contact">
-      <div className="wrap">
-        <div className="contact-grid">
-          <div>
-            <h2 className="section-title" data-reveal>Me<br />contacter</h2>
-            <p className="contact-lead" data-reveal style={{ "--d": "100ms" }}>
-              Disponible pour une alternance Data Analyst / BI à partir de septembre 2026, rythme 1 mois en entreprise / 1 mois à l'ECE Paris. N'hésitez pas à m'écrire. Je réponds sous 48h.
-            </p>
-            <div className="contact-links" data-reveal style={{ "--d": "160ms" }}>
-              <a href={"mailto:" + D.email} className="cl"><span className="cl-l">Email</span>{D.email}</a>
-              <a href={"tel:" + D.phone.replace(/\s/g, "")} className="cl"><span className="cl-l">Téléphone</span>{D.phone}</a>
-              <a href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" className="cl"><span className="cl-l">LinkedIn</span>/in/emmanueldanton</a>
-            </div>
-          </div>
-
-          <div data-reveal style={{ "--d": "120ms" }}>
-            {sent ? (
-              <div className="form-ok">
-                <div className="check">✓</div>
-                <div>
-                  <div className="t">Message envoyé.</div>
-                  <div className="s">Merci {form.name.split(" ")[0]}, je reviens vers vous très vite.</div>
-                </div>
+    <React.Fragment>
+      <section className="section dark kb-section" id="contact">
+        <div className="wrap">
+          <div className="kb" data-reveal>
+            <div className="kb-txt">
+              <h2>{tr("On se parle ?")}</h2>
+              <p>{D.contactLead}</p>
+              <div className="kb-links">
+                <a className="kb-soc" href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" aria-label="LinkedIn">{LOGO_LINKEDIN}</a>
+                <a className="kb-soc" href="https://github.com/emmanueldanton" target="_blank" rel="noreferrer" aria-label="GitHub">{LOGO_GITHUB}</a>
+                <a href={D.cv} download>{tr("Mon CV")} <span aria-hidden="true">↓</span></a>
               </div>
-            ) : (
-              <form className="form" onSubmit={submit} noValidate>
-                <div className={"field" + (errors.name ? " err" : "")}>
-                  <label htmlFor="f-name">Nom</label>
-                  <input id="f-name" name="name" autoComplete="name" value={form.name} onChange={set("name")} placeholder="Votre nom" />
-                  {errors.name && <span className="msg">{errors.name}</span>}
-                </div>
-                <div className={"field" + (errors.email ? " err" : "")}>
-                  <label htmlFor="f-email">Email</label>
-                  <input id="f-email" name="email" type="email" autoComplete="email" value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" />
-                  {errors.email && <span className="msg">{errors.email}</span>}
-                </div>
-                <div className={"field" + (errors.message ? " err" : "")}>
-                  <label htmlFor="f-msg">Message</label>
-                  <textarea id="f-msg" name="message" rows="4" value={form.message} onChange={set("message")} placeholder="Parlez-moi de votre besoin…"></textarea>
-                  {errors.message && <span className="msg">{errors.message}</span>}
-                </div>
-                <button type="submit" className={"btn btn-primary" + (loading ? " btn-loading" : "")} disabled={loading}>
-                  {loading ? "Envoi en cours…" : "Envoyer"} <span className="arr">↗</span>
-                </button>
-                {submitError && <p className="submit-err">{submitError}</p>}
-              </form>
-            )}
+            </div>
+            <ContactForm />
           </div>
         </div>
-      </div>
+      </section>
 
-      <footer className="bigfoot">
+      <footer className="fc">
         <div className="wrap">
-          <div className="bigfoot-name" data-reveal>{D.firstName}</div>
-          <div className="bigfoot-name" data-reveal style={{ "--d": "80ms" }}>{D.lastName}</div>
-          <div className="shapes" data-reveal style={{ "--d": "140ms" }}>
-            {SHAPES.map((s, i) => <Shape key={i} s={s} />)}
+          <div className="fc-row">
+            <div>
+              <span className="fc-brand"><i></i>E. Danton</span>
+              <p>{D.hero.mission}</p>
+            </div>
+            <ul className="fc-pills">
+              {FOOT_NAV.map(function(n, i) {
+                return (
+                  <li key={n.id} style={{ "--r": TILT[i] + "deg" }}>
+                    <a className={"c-" + PAL[i % PAL.length]} href={"#" + n.id}>{n.label}</a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-          <div className="foot-cols">
-            <div>
-              <h4>Réseaux</h4>
-              {D.social.map((s) => <a key={s.label} href={s.href}>{s.label}</a>)}
-              <a href={D.cv} download>Télécharger CV</a>
-            </div>
-            <div>
-              <h4>Contact</h4>
-              <a href={"mailto:" + D.email}>{D.email}</a>
-              <p>{D.phone}</p>
-              <p>{D.location}</p>
-            </div>
-            <div>
-              <h4>Disponibilité</h4>
-              <p>Alternance · sept. 2026</p>
-              <p>Rythme 1 mois / 1 mois</p>
-              <p>Data Analyst, BI</p>
-            </div>
-          </div>
-          <div className="foot-bottom">
-            <span>© 2026 {D.name} · Data Analyst & BI</span>
-            <span>Conçu avec rigueur et curiosité</span>
+          <div className="fc-bot">
+            <span>© 2026 {D.name}</span>
+            <span className="fc-soc">
+              <a href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" aria-label="LinkedIn">{LOGO_LINKEDIN}</a>
+              <a href="https://github.com/emmanueldanton" target="_blank" rel="noreferrer" aria-label="GitHub">{LOGO_GITHUB}</a>
+            </span>
+            <a href="#top" className="fc-up" onClick={function(e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{tr("Haut de page")} <span aria-hidden="true">↑</span></a>
           </div>
         </div>
       </footer>
-    </section>
+    </React.Fragment>
   );
 }
 
 /* ---------- ABOUT DETAIL ---------- */
 function AboutDetail({ onClose }) {
-  useEffect(function() {
-    function onKey(e) { if (e.key === 'Escape') onClose(); }
-    document.addEventListener('keydown', onKey);
-    window.addEventListener('nav:close-overlay', onClose);
-    document.body.style.overflow = 'hidden';
-    return function() {
-      document.removeEventListener('keydown', onKey);
-      window.removeEventListener('nav:close-overlay', onClose);
-      document.body.style.overflow = '';
-    };
-  }, []);
-
+  useOverlay(onClose);
   return (
-    <div className="proj-detail-overlay" role="dialog" aria-modal="true" aria-label="À propos — Emmanuel Danton">
-      <div className="proj-detail-inner">
-        <div className="proj-detail-topbar">
-          <button className="proj-detail-back" onClick={onClose} aria-label="Fermer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            Retour
-          </button>
+    <div className="proj-detail-overlay dw" role="dialog" aria-modal="true" aria-label="À propos de Emmanuel Danton">
+      <div className="dw-in c-lime">
+        <div className="dw-top">
+          <button type="button" className="dw-back" onClick={onClose}><span aria-hidden="true">←</span> {tr("Retour")}</button>
         </div>
 
-        <h2 className="proj-detail-title">À propos</h2>
-
-        <div className="about-detail-grid">
-          <img src="assets/portrait.jpg" alt={D.name} className="about-detail-photo" />
-          <div className="about-detail-text">
-            <p dangerouslySetInnerHTML={{ __html: D.about.p1 }} />
-            <p dangerouslySetInnerHTML={{ __html: D.about.p2 }} />
-            <p dangerouslySetInnerHTML={{ __html: D.about.p3 }} />
+        <header className="dw-head">
+          <div className="dw-intro">
+            <h2 className="dw-title">{tr("Moi, c'est Emmanuel")}</h2>
+            <p className="dw-lead" dangerouslySetInnerHTML={{ __html: D.about.p1 }} />
           </div>
+          <div className="dw-panel dw-panel--me">
+            <img src="assets/photos/hero-detoure.webp" alt={D.hero.photoAlt} />
+          </div>
+        </header>
+
+        <div className="dw-text">
+          <p dangerouslySetInnerHTML={{ __html: D.about.p2 }} />
+          <p dangerouslySetInnerHTML={{ __html: D.about.p3 }} />
         </div>
 
-        <div className="chips about-detail-chips">
-          {D.about.chips.map(function(c, i) {
-            return (
-              <div className="chip" key={i}>
-                <div className="chip-l">{c.label}</div>
-                <div className="chip-v">{c.value}</div>
-              </div>
-            );
+        <ul className="dw-chips">
+          {D.about.chips.map(function(c) {
+            return <li key={c.label}><span>{c.label}</span><b>{c.value}</b></li>;
           })}
-        </div>
+        </ul>
 
-        <a href={D.cv} download className="btn btn-primary" style={{ marginTop: "48px" }}>
-          Télécharger mon CV
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </a>
-        <DetailFooter />
+        <Gallery items={D.terrain.photos} />
+
+        <div className="dw-cta">
+          <a href={D.cv} download className="dw-btn dw-btn--main">{tr("Télécharger mon CV")} <span aria-hidden="true">↓</span></a>
+          <a href="#contact" className="dw-btn" onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
+      <DetailEnd next={{ k: tr("Une idée, un projet ?"), label: tr("On se parle"), go: function() { onClose(); setTimeout(function() { var el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 60); } }} />
     </div>
   );
 }
@@ -755,7 +786,7 @@ function ScrollToTop() {
     <button
       className={"scroll-top" + (visible ? " scroll-top--visible" : "")}
       onClick={goTop}
-      aria-label="Remonter en haut"
+      aria-label={tr("Remonter en haut")}
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <polyline points="18 15 12 9 6 15"/>
@@ -805,7 +836,6 @@ function App() {
     <React.Fragment>
       <Nav scrolled={scrolled} active={active} onOpenAbout={() => setOpenAbout(true)} />
       <Hero onOpenAbout={() => setOpenAbout(true)} />
-      <StatsBand />
       <div id="apropos" />
       <Skills />
       <SoftSkills />

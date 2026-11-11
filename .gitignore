@@ -3,3 +3,9 @@
 
 # Plans Claude
 .thumbnail
+
+# Suivi et brouillons, hors dépôt
+.planning/
+scraps/directions/
+scraps/extrait-hero/
+scraps/propositions/
