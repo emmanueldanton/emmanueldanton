@@ -750,6 +750,8 @@ function AboutDetail({ onClose }) {
           </div>
         </header>
 
+        <p className="dw-say" dangerouslySetInnerHTML={{ __html: D.about.quote }} />
+
         <div className="dw-text">
           <p dangerouslySetInnerHTML={{ __html: D.about.p2 }} />
           <p dangerouslySetInnerHTML={{ __html: D.about.p3 }} />

@@ -7,24 +7,24 @@ window.PORTFOLIO_I18N.en = {
     role: "Data & AI Engineer",
     hero: {
       mission: "I combine AI, automation and design to help teams move faster.",
-      lead: "Junior Project Manager at Ipsos, in the CX Platform team, and Data & AI engineering student at ECE Paris. What I enjoy most is finding a simple solution to a problem.",
+      lead: "Junior Project Manager at Ipsos BVA, in the Customer Experience & Platforms team, and Data & AI engineering student at ECE Paris. What I enjoy most is finding a simple solution to a problem.",
       photoAlt: "Portrait of Emmanuel Danton",
       tags: {
-        poste: { v: "Junior Project Manager", k: "Ipsos · customer experience" },
+        poste: { v: "Junior Project Manager", k: "Ipsos BVA · customer experience" },
         capteurs: "1,200+ IoT sensors monitored",
         ventes: { k: "sales · Hupple Store" },
       },
     },
     marquee: ["Data analysis", "Data visualisation", "Graphic design", "Adobe Suite", "Automation", "Artificial intelligence", "Project management", "Customer experience", "Dashboards", "Content creation", "Data storytelling", "UI design"],
     about: {
-      p1: "I am a Junior Project Manager at <strong>Ipsos</strong>, in the CX Platform team, on a work-study programme alongside my Data & AI engineering degree at <strong>ECE Paris</strong>. My field is <strong>customer experience</strong>: understanding what customers go through so that teams can serve them better.",
-      p2: "I have followed that thread from the start. At <strong>CAD.42</strong>, I built a dashboard that monitors more than 1,200 IoT sensors across 100+ construction sites. At <strong>InspiraTec</strong>, I automated the collection of 50+ qualified job offers a day. With <strong>Hupple Store</strong>, my online shop, I have made 353 sales. Each time I started from a problem and looked for <strong>the simplest solution</strong>.",
-      p3: "I come from Cotonou, Benin, and I have worked in international teams in Belgium and Spain. I look for solutions wherever they are: in data, AI, automation, design or graphics. And I always keep in mind <em>who it is for, and why</em>.",
+      quote: "My common thread: understand a need, analyse the data and <strong>take action</strong>.",
+      p1: "I am a Data & AI engineering student at <strong>ECE Paris</strong> and a work-study Junior Project Manager at <strong>Ipsos BVA</strong>, in the <strong>Customer Experience & Platforms</strong> team.",
+      p2: "My path has led me to work on very different subjects. At <strong>CAD.42</strong>, I worked on data analysis and visualisation to answer operational problems, with a dashboard that tracks more than 1,200 IoT sensors across about a hundred construction sites. I am also building <strong>Hupple Store</strong>, an e-commerce shop for French-speaking Africa, where I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting. It is <strong>my playground</strong>: it lets me test, measure and adjust my decisions based on real data, over 361 sales so far.",
+      p3: "Today, at Ipsos BVA, I am building my skills in project management, coordination and understanding client needs. Originally from Cotonou, Benin, I have also worked in international teams in Belgium and Spain. In the long run, I want to bring these experiences together to work on projects <em>at the crossroads of data, AI and business</em>.",
       chips: [
         { label: "Location", value: "Paris, France" },
-        { label: "Position", value: "Junior Project Manager at Ipsos" },
-        { label: "Team", value: "CX Platform, customer experience" },
-        { label: "Rhythm", value: "1 month at work / 1 month at ECE" },
+        { label: "Position", value: "Junior Project Manager at Ipsos BVA" },
+        { label: "Team", value: "Customer Experience & Platforms" },
         { label: "Level", value: "Engineering degree, ECE Paris (Master's level)" },
         { label: "Languages", value: "French (native), English (professional)" },
       ],
@@ -39,8 +39,8 @@ window.PORTFOLIO_I18N.en = {
         ],
         tags: ["Medallia", "Customer experience", "Project management", "Documentation", "Automation"],
         detail: {
-          brief: "I work at Ipsos, in the CX Platform team. It runs the customer experience programmes of Ipsos clients on Medallia.",
-          role: "Junior Project Manager, IT Platforms. I alternate one month at the company and one month at ECE Paris, where I am completing my engineering degree.",
+          brief: "I am a work-study student at Ipsos BVA, in the Customer Experience & Platforms team. The team runs the customer experience programmes of Ipsos clients on Medallia.",
+          role: "Junior Project Manager, IT Platforms. I coordinate client programmes with the team, understand needs and look for what can be simplified or automated.",
           result: "The assignment is ongoing. I use Medallia every day and I look for places where automation can save the team time.",
           steps: [
             { title: "Understanding the programmes", desc: "I learned how the customer experience programmes work and how the team keeps them running day to day." },
@@ -48,8 +48,8 @@ window.PORTFOLIO_I18N.en = {
             { title: "Document, then automate", desc: "I document the team's processes to spot repetitive tasks and suggest simple automations." },
           ],
           facts: [
-            { k: "CX Platform team, customer experience" },
-            { k: "One month at Ipsos, one month at ECE" },
+            { k: "Customer Experience & Platforms team" },
+            { k: "the platform I use every day" },
             { k: "In the role since September" },
           ],
         },
@@ -120,12 +120,13 @@ window.PORTFOLIO_I18N.en = {
       {
         client: "Erasmus+ · University of Zaragoza · July 2026",
         title: "CaRental, cutting costs without making customers wait",
+        desc: "Erasmus+ project at the University of Zaragoza. An airport rental agency wanted to know which shuttle fleet costs the least while keeping at least 85% of customers satisfied. In an international team of four, we simulated more than 100 scenarios and arrived at a configuration at €6.54 per customer.",
         tags: ["JaamSim", "Simulation", "Python", "Optimisation", "English"],
         media: [{ alt: "Results slide: trade-off between cost and service quality for each scenario" }, { alt: "The CaRental team in front of its presentation" }],
         detail: {
-          brief: "An airport car rental agency wanted to know which shuttle fleet costs the least while keeping at least 85% of customers satisfied.",
-          role: "I was in charge of the data analysis and the presentation, in an international team of four.",
-          result: "We compared more than 100 scenarios and selected a configuration at €6.54 per customer, presented in English at the University of Zaragoza.",
+          brief: "An airport car rental agency was looking for the cheapest shuttle fleet that could keep at least 85% of customers satisfied.",
+          role: "In an international team of four, I was in charge of the data analysis and the presentation of the results.",
+          result: "After comparing more than 100 scenarios, we recommended a configuration at €6.54 per customer, presented in English at the University of Zaragoza.",
           steps: [
             { title: "Framing the problem", desc: "We turned the agency's question into a measurable goal: the lowest cost per customer, with at least 85% of customers satisfied." },
             { title: "Simulating the service", desc: "We modelled the shuttles and the rental desk in JaamSim, a simulation software." },
@@ -147,17 +148,18 @@ window.PORTFOLIO_I18N.en = {
       {
         client: "My business · since Feb. 2026",
         title: "Hupple Store, e-commerce data",
+        desc: "An e-commerce shop for French-speaking Africa that I am building on my own. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, with orders automated in n8n. 361 sales and 321 customers so far.",
         tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
         media: [{ alt: "Home page of the Hupple Store shop, with its three featured bundles" }],
         detail: {
-          brief: "I launched a digital guides shop on my own, with remote customers and a small advertising budget. Orders had to process themselves and I needed to see where every sale stood.",
-          role: "Founder. I create the products and the visuals, build the automations and follow the numbers.",
-          result: "353 sales and 314 customers, mostly in 14 African countries.",
+          brief: "I launched Hupple Store to sell digital guides in French-speaking Africa, on a limited advertising budget. Orders had to process themselves and every decision had to rest on numbers. It is also my playground: it lets me test, measure and adjust my decisions based on real data.",
+          role: "Founder. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, as well as the automations.",
+          result: "361 sales and 321 customers, mostly in 14 African countries.",
           steps: [
-            { title: "Capturing every event", desc: "Webhooks record every visit, cart, order and payment, and send them to n8n live." },
-            { title: "Automating the tasks", desc: "n8n workflows follow up abandoned carts, notify me of each order and keep the data up to date." },
-            { title: "Choosing the right indicators", desc: "I defined the steps that lead from a visit to a purchase, to measure where visitors drop off and what each product brings in." },
-            { title: "Daily follow-up", desc: "A dashboard shows me conversion, revenue per product and anything unusual every day." },
+            { title: "Bringing in the right customers", desc: "I launch and manage Meta ad campaigns, country by country, and write the copy for the ads and product pages." },
+            { title: "Automating the orders", desc: "Webhooks and n8n workflows process every order, follow up abandoned carts and keep the data up to date." },
+            { title: "Measuring every step", desc: "I follow the journey from the ad to the payment to see where visitors drop off and what each product brings in." },
+            { title: "Adjusting", desc: "A daily dashboard shows me conversion and revenue per product; I adjust prices, offers and campaigns based on these numbers." },
           ],
           facts: [{ k: "sales" }, { k: "customers" }, { k: "African countries" }],
         },
@@ -165,11 +167,12 @@ window.PORTFOLIO_I18N.en = {
       {
         client: "Personal project · 2026",
         title: "MyFinanx, personal finance",
+        desc: "A budget app I designed and built on my own. The need: track spending without creating an account or handing over your data. It installs on a phone, gives AI advice and reads receipts.",
         tags: ["PWA", "JavaScript", "Vite", "AI", "Receipt scanning"],
         media: [{ alt: "MyFinanx dashboard on desktop, with demo data" }, { alt: "MyFinanx on a phone, with demo data" }],
         detail: {
           brief: "Budget apps often require an account and keep everything on their servers. MyFinanx lets you follow your budget without handing over your data.",
-          role: "I did everything myself, from the design to going live.",
+          role: "I led the project end to end, from design to going live.",
           result: "The app is online and free, and the data stays on the device.",
           steps: [
             { title: "Starting from the use", desc: "I designed an installable app, built for the phone first." },
@@ -187,11 +190,12 @@ window.PORTFOLIO_I18N.en = {
       {
         client: "International · April 2025, Belgium",
         title: "Football analytics, OHL",
+        desc: "During the BUSIT Week at UC Leuven-Limburg, in Belgium, I analysed the performance data of the OH Leuven club with an international team, then we presented our recommendations to a panel of the club's experts.",
         tags: ["Python", "Pandas", "Seaborn", "SQL", "English"],
         media: [{ alt: "Heatmap of OH Leuven's successful actions in the first half" }, { alt: "Heatmap of OH Leuven's successful actions in the second half" }],
         detail: {
-          brief: "During the BUSIT Week at UC Leuven-Limburg, in Belgium, the football club OH Leuven entrusted us with its performance data. We were an international team of five.",
-          role: "Data Analyst in the team. I handled the indicators and the charts that make the results readable.",
+          brief: "During the BUSIT Week at UC Leuven-Limburg, the football club OH Leuven entrusted us with its performance data, with one question: what can it tell us about recruitment, playing style and physical load management?",
+          role: "In an international team of five, I built the indicators and the charts that make the results readable.",
           result: "We presented concrete recommendations to experts from the club, based on a full season of match and player data.",
           steps: [
             { title: "Exploring the data", desc: "We went through the club's dataset: player statistics, match data, physical and tactical measures over a season." },

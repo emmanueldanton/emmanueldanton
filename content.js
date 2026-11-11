@@ -10,12 +10,12 @@ window.PORTFOLIO = {
 
   hero: {
     mission: "J'allie IA, automatisation et design pour aider les équipes à avancer plus vite.",
-    lead: "Chef de projet junior chez Ipsos, dans l'équipe CX Platform, et élève ingénieur Data & IA à l'ECE Paris. Ce que j'aime, c'est trouver une solution simple à un problème.",
+    lead: "Chef de projet junior chez Ipsos BVA, dans l'équipe Expérience Client & Plateformes, et étudiant en cycle ingénieur Data & IA à l'ECE Paris. Ce que j'aime, c'est trouver une solution simple à un problème.",
     photoAlt: "Portrait d'Emmanuel Danton",
     tags: {
-      poste: { v: "Chef de projet junior", k: "Ipsos · expérience client" },
+      poste: { v: "Chef de projet junior", k: "Ipsos BVA · expérience client" },
       capteurs: "1 200+ capteurs IoT suivis",
-      ventes: { v: "353", k: "ventes · Hupple Store" },
+      ventes: { v: "361", k: "ventes · Hupple Store" },
     },
   },
 
@@ -23,19 +23,19 @@ window.PORTFOLIO = {
 
   stats: [
     { num: "03",   u: "",   lbl: "expériences en entreprise" },
-    { num: "353",  u: "",   lbl: "ventes sur ma boutique Hupple Store" },
+    { num: "361",  u: "",   lbl: "ventes sur ma boutique Hupple Store" },
     { num: "1200", u: "+",  lbl: "capteurs IoT suivis en temps réel" },
   ],
 
   about: {
-    p1: "Je suis chef de projet junior chez <strong>Ipsos</strong>, dans l'équipe CX Platform, en alternance avec mon cycle ingénieur Data & IA à l'<strong>ECE Paris</strong>. Mon terrain, c'est l'<strong>expérience client</strong> : comprendre ce que vivent les clients pour aider les équipes à mieux les servir.",
-    p2: "Ce fil, je le suis depuis le début. Chez <strong>CAD.42</strong>, j'ai construit un tableau de bord qui suit plus de 1 200 capteurs IoT sur 100+ chantiers. Chez <strong>InspiraTec</strong>, j'ai automatisé la collecte de 50+ offres qualifiées par jour. Avec <strong>Hupple Store</strong>, ma boutique en ligne, j'ai réalisé 353 ventes. À chaque fois, je suis parti d'un problème et j'ai cherché <strong>la solution la plus simple</strong>.",
-    p3: "Je viens de Cotonou, au Bénin, et j'ai travaillé en équipes internationales en Belgique et en Espagne. Mes solutions, je vais les chercher là où elles se trouvent : dans la data, l'IA, l'automatisation, le design ou le graphisme. Et je garde toujours en tête <em>à qui cela sert et pourquoi</em>.",
+    quote: "Mon fil conducteur : comprendre un besoin, analyser les données et <strong>passer à l'action</strong>.",
+    p1: "Je suis étudiant en cycle ingénieur Data & IA à l'<strong>ECE Paris</strong> et alternant chef de projet junior chez <strong>Ipsos BVA</strong>, au sein de l'équipe <strong>Expérience Client & Plateformes</strong>.",
+    p2: "Mon parcours m'a permis de travailler sur des sujets très différents. Chez <strong>CAD.42</strong>, j'ai travaillé sur l'analyse et la visualisation de données pour répondre à des problématiques opérationnelles, avec un tableau de bord qui suit plus de 1 200 capteurs IoT sur une centaine de chantiers. Je développe également <strong>Hupple Store</strong>, une boutique e-commerce destinée à l'Afrique francophone, où je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting. C'est <strong>mon terrain de jeu</strong> : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles, sur 361 ventes à ce jour.",
+    p3: "Aujourd'hui, chez Ipsos BVA, je développe davantage mes compétences en gestion de projet, en coordination et en compréhension des besoins clients. Originaire de Cotonou, au Bénin, j'ai aussi travaillé en équipe internationale en Belgique et en Espagne. À terme, je souhaite réunir ces expériences pour travailler sur des projets <em>à l'intersection de la Data, de l'IA et du business</em>.",
     chips: [
       { label: "Localisation",  value: "Paris, Île-de-France" },
-      { label: "Poste",         value: "Chef de projet junior chez Ipsos" },
-      { label: "Équipe",        value: "CX Platform, expérience client" },
-      { label: "Rythme",        value: "1 mois entreprise / 1 mois ECE" },
+      { label: "Poste",         value: "Chef de projet junior chez Ipsos BVA" },
+      { label: "Équipe",        value: "Expérience Client & Plateformes" },
       { label: "Niveau",        value: "Cycle ingénieur ECE Paris (Bac+5)" },
       { label: "Anglais",       value: "Professionnel (lecture & rédaction)" },
     ],
@@ -48,7 +48,7 @@ window.PORTFOLIO = {
       logo: "assets/ipsos.svg",
       ph: "Alternance",
       role: "Chef de projet junior Plateformes IT",
-      co: "Ipsos · Paris",
+      co: "Ipsos BVA · Paris",
       bullets: [
         "Je fais tourner, avec l'équipe, les programmes d'expérience client de nos clients sur Medallia",
         "J'utilise Medallia au quotidien et j'en approfondis les fonctions avancées",
@@ -56,8 +56,8 @@ window.PORTFOLIO = {
       ],
       tags: ["Medallia", "Expérience client", "Gestion de projet", "Documentation", "Automatisation"],
       detail: {
-        brief: "Je suis en alternance chez Ipsos, dans l'équipe CX Platform. C'est elle qui fait tourner, sur Medallia, les programmes d'expérience client des clients d'Ipsos.",
-        role: "Chef de projet junior Plateformes IT. J'alterne un mois en entreprise et un mois à l'ECE Paris, où je suis mon cycle ingénieur.",
+        brief: "Je suis alternant chez Ipsos BVA, au sein de l'équipe Expérience Client & Plateformes. L'équipe fait tourner sur Medallia les programmes d'expérience client des clients d'Ipsos.",
+        role: "Chef de projet junior Plateformes IT. Je coordonne avec l'équipe les programmes clients, je comprends les besoins et je cherche ce qui peut être simplifié ou automatisé.",
         result: "La mission est en cours. J'utilise Medallia au quotidien et je cherche où l'automatisation peut faire gagner du temps à l'équipe.",
         steps: [
           { n: "01", title: "Comprendre les programmes", desc: "Je découvre les programmes d'expérience client et la façon dont l'équipe les fait vivre au quotidien." },
@@ -65,8 +65,8 @@ window.PORTFOLIO = {
           { n: "03", title: "Documenter, puis automatiser", desc: "Je documente les processus de l'équipe pour repérer les tâches qui se répètent et proposer des automatisations simples." },
         ],
         facts: [
-          { v: "CX", k: "Équipe CX Platform, expérience client" },
-          { v: "1 / 1", k: "Un mois chez Ipsos, un mois à l'ECE" },
+          { v: "CX", k: "Équipe Expérience Client & Plateformes" },
+          { v: "Medallia", k: "la plateforme que j'utilise au quotidien" },
           { v: "2026", k: "En poste depuis septembre" },
         ],
       },
@@ -177,7 +177,7 @@ window.PORTFOLIO = {
     { ico: "rocket", t: "Autonomie",            d: "Hupple Store, je l'ai lancée seul : les produits, les visuels, les automatisations. Quand je vois un problème, je propose et je teste." },
     { ico: "chat",   t: "Vulgarisation",        d: "J'ai présenté mes résultats en anglais devant un jury à Saragosse et devant les experts d'un club de football en Belgique. Si ce n'est pas clair, c'est à moi de refaire." },
     { ico: "video",  t: "Création de contenu",  d: "J'aime créer : visuels, vidéos, carrousels. Ceux de Hupple Store, c'est moi. Et oui, je suis celui qui refait la diapositive parce qu'un alignement le dérange." },
-    { ico: "users",  t: "Esprit d'équipe",      d: "BUSIT Week en Belgique, Erasmus+ à Saragosse, équipe CX Platform chez Ipsos : j'ai surtout appris avec les autres." },
+    { ico: "users",  t: "Esprit d'équipe",      d: "BUSIT Week en Belgique, Erasmus+ à Saragosse, équipe Expérience Client & Plateformes chez Ipsos BVA : j'ai surtout appris avec les autres." },
     { ico: "spark",  t: "Curiosité",            d: "Un nouvel outil sort, je l'essaie dans la semaine. C'est comme ça que n8n et Claude sont entrés dans ma boîte à outils." },
     { ico: "pen",    t: "Œil de designer",      d: "Un tableau de bord bien présenté, c'est un tableau de bord qu'on utilise. Je soigne les marges autant que les requêtes." },
     { ico: "globe",  t: "Adaptation",           d: "Cotonou, Paris, la Belgique, l'Espagne : j'ai changé de pays, d'école et d'équipe plusieurs fois. Je prends vite mes marques." },
@@ -189,7 +189,7 @@ window.PORTFOLIO = {
       pn: "01",
       client: "Erasmus+ · Université de Saragosse · juillet 2026",
       title: "CaRental, réduire les coûts sans faire attendre",
-      desc: "Quelle flotte de navettes coûte le moins cher en gardant au moins 85 % de clients satisfaits ? Plus de 100 scénarios simulés en équipe internationale de 4, pour une configuration à 6,54 € par client.",
+      desc: "Projet Erasmus+ à l'Université de Saragosse. Une agence de location d'aéroport voulait savoir quelle flotte de navettes coûte le moins cher tout en gardant au moins 85 % de clients satisfaits. En équipe internationale de quatre, nous avons simulé plus de 100 scénarios pour aboutir à une configuration à 6,54 € par client.",
       tags: ["JaamSim", "Simulation", "Python", "Optimisation", "Anglais"],
       media: [
         { src: "assets/projets/carental-resultats.jpg", alt: "Diapositive de résultats : compromis entre coût et qualité de service pour chaque scénario" },
@@ -197,9 +197,9 @@ window.PORTFOLIO = {
       ],
       url: null,
       detail: {
-        brief: "Une agence de location de voitures d'aéroport voulait savoir quelle flotte de navettes coûte le moins cher, tout en gardant au moins 85 % de clients satisfaits.",
-        role: "J'ai pris en charge l'analyse des données et la présentation, dans une équipe internationale de quatre personnes.",
-        result: "Nous avons comparé plus de 100 scénarios et retenu une configuration à 6,54 € par client, présentée en anglais à l'Université de Saragosse.",
+        brief: "Une agence de location de voitures d'aéroport cherchait la flotte de navettes la moins coûteuse capable de garder au moins 85 % de clients satisfaits.",
+        role: "Au sein d'une équipe internationale de quatre personnes, j'ai pris en charge l'analyse des données et la présentation des résultats.",
+        result: "Après plus de 100 scénarios comparés, nous avons recommandé une configuration à 6,54 € par client, présentée en anglais à l'Université de Saragosse.",
         steps: [
           { n: "01", title: "Poser le problème", desc: "Nous avons traduit la question de l'agence en objectif chiffré : le coût par client le plus bas, avec au moins 85 % de clients satisfaits." },
           { n: "02", title: "Simuler le service", desc: "Nous avons modélisé les navettes et le comptoir de location dans JaamSim, un logiciel de simulation." },
@@ -222,7 +222,7 @@ window.PORTFOLIO = {
       pn: "02",
       client: "Mon entreprise · depuis fév. 2026",
       title: "Hupple Store, data e-commerce",
-      desc: "Boutique de guides numériques que je pilote de bout en bout : produits, visuels, commandes automatisées avec webhooks et n8n, suivi des KPI. 353 ventes et 314 clients, surtout dans 14 pays africains.",
+      desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. 361 ventes et 321 clients à ce jour.",
       tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
       media: [
         { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store, avec ses trois packs en vedette" },
@@ -230,18 +230,18 @@ window.PORTFOLIO = {
       url: "https://hupplemarket.mychariow.com",
       logo: "assets/hupple-logo.png",
       detail: {
-        brief: "J'ai lancé seul une boutique de guides numériques, avec des clients à distance et un petit budget publicitaire. Il fallait que les commandes se traitent toutes seules et que je voie où en était chaque vente.",
-        role: "Fondateur. Je crée les produits et les visuels, je construis les automatisations et je suis les chiffres.",
-        result: "353 ventes et 314 clients, surtout dans 14 pays africains.",
+        brief: "J'ai lancé Hupple Store pour vendre des guides numériques en Afrique francophone, avec un budget publicitaire limité. Il fallait que les commandes se traitent seules et que chaque décision repose sur des chiffres. C'est aussi mon terrain de jeu : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles.",
+        role: "Fondateur. Je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, ainsi que les automatisations.",
+        result: "361 ventes et 321 clients, surtout dans 14 pays africains.",
         steps: [
-          { n: "01", title: "Capter chaque événement", desc: "Des webhooks enregistrent chaque visite, chaque panier, chaque commande et chaque paiement, et les envoient à n8n en direct." },
-          { n: "02", title: "Automatiser les tâches", desc: "Des workflows n8n relancent les paniers abandonnés, préviennent à chaque commande et gardent les données à jour." },
-          { n: "03", title: "Choisir les bons indicateurs", desc: "J'ai défini les étapes qui mènent de la visite à l'achat, pour mesurer où les visiteurs décrochent et ce que rapporte chaque produit." },
-          { n: "04", title: "Suivre au quotidien", desc: "Un tableau de bord me montre chaque jour la conversion, les revenus par produit et ce qui sort de l'ordinaire." },
+          { n: "01", title: "Attirer les bons clients", desc: "Je lance et pilote les campagnes publicitaires Meta, pays par pays, et j'écris les textes des annonces et des pages produits." },
+          { n: "02", title: "Automatiser les commandes", desc: "Des webhooks et des workflows n8n traitent chaque commande, relancent les paniers abandonnés et gardent les données à jour." },
+          { n: "03", title: "Mesurer chaque étape", desc: "Je suis le parcours de la publicité jusqu'au paiement pour voir où les visiteurs décrochent et ce que rapporte chaque produit." },
+          { n: "04", title: "Ajuster", desc: "Un tableau de bord quotidien me montre la conversion et les revenus par produit ; j'ajuste les prix, les offres et les campagnes à partir de ces chiffres." },
         ],
         facts: [
-          { v: "353", k: "ventes" },
-          { v: "314", k: "clients" },
+          { v: "361", k: "ventes" },
+          { v: "321", k: "clients" },
           { v: "14", k: "pays africains" },
         ],
       },
@@ -250,7 +250,7 @@ window.PORTFOLIO = {
       pn: "03",
       client: "Projet personnel · 2026",
       title: "MyFinanx, gestion financière",
-      desc: "Application de budget installable sur téléphone, avec conseils par IA et scan de tickets de caisse. Les données restent sur l'appareil.",
+      desc: "Application de budget que j'ai conçue et développée seul. Le besoin : suivre ses dépenses sans créer de compte ni confier ses données. Elle s'installe sur téléphone, propose des conseils par IA et lit les tickets de caisse.",
       tags: ["PWA", "JavaScript", "Vite", "IA", "Scan de tickets"],
       media: [
         { src: "assets/projets/myfinanx-desktop.jpg", alt: "Tableau de bord de MyFinanx sur ordinateur, avec des données de démonstration" },
@@ -259,7 +259,7 @@ window.PORTFOLIO = {
       url: "https://myfinanx.vercel.app",
       detail: {
         brief: "Les applications de budget demandent souvent un compte et gardent tout sur leurs serveurs. MyFinanx permet de suivre son budget sans donner ses données.",
-        role: "J'ai tout fait seul, du design à la mise en ligne.",
+        role: "J'ai mené le projet de bout en bout, de la conception à la mise en ligne.",
         result: "L'application est en ligne et gratuite, et les données restent sur l'appareil.",
         steps: [
           { n: "01", title: "Partir de l'usage", desc: "J'ai conçu une application installable, pensée d'abord pour le téléphone." },
@@ -282,7 +282,7 @@ window.PORTFOLIO = {
       pn: "04",
       client: "International · avril 2025, Belgique",
       title: "Football analytics, OHL",
-      desc: "Analyse des données du club OHL en équipe internationale lors de la BUSIT Week UC Leuven-Limburg, avec des insights stratégiques présentés devant un panel d'experts du club.",
+      desc: "Lors de la BUSIT Week de l'UC Leuven-Limburg, en Belgique, j'ai analysé avec une équipe internationale les données de performance du club OH Leuven, puis nous avons présenté nos recommandations à un panel d'experts du club.",
       tags: ["Python", "Pandas", "Seaborn", "SQL", "Anglais"],
       layout: "duo",
       media: [
@@ -291,8 +291,8 @@ window.PORTFOLIO = {
       ],
       url: null,
       detail: {
-        brief: "Pendant la BUSIT Week de l'UC Leuven-Limburg, en Belgique, le club de football OH Leuven nous a confié ses données de performance. Nous étions une équipe internationale de cinq.",
-        role: "Data Analyst dans l'équipe. Je m'occupais des indicateurs et des graphiques qui rendent les résultats lisibles.",
+        brief: "Pendant la BUSIT Week de l'UC Leuven-Limburg, le club de football OH Leuven nous a confié ses données de performance, avec une question : qu'en tirer pour le recrutement, le jeu et la gestion de la charge physique ?",
+        role: "Au sein d'une équipe internationale de cinq personnes, j'ai construit les indicateurs et les graphiques qui rendent les résultats lisibles.",
         result: "Nous avons présenté des recommandations concrètes devant des experts du club, à partir d'une saison complète de données de matchs et de joueurs.",
         steps: [
           { n: "01", title: "Explorer les données", desc: "Nous avons parcouru le jeu de données du club : statistiques des joueurs, données de match, mesures physiques et tactiques sur une saison." },
