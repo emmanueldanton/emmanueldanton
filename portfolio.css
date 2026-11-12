@@ -1841,3 +1841,25 @@ img.hx-spark--1.hx-chart{ top:-14%; right:-12%; }
 /* Liens avec icône : texte et icône toujours sur la même ligne */
 a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
 .dw-end-bot a, .kb-links a, .fc-up, .sb-name{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+
+/* Héros téléphone : texte et pastille de flèche centrés ensemble dans chaque bouton */
+@media(max-width:560px){
+  .hx-actions .hx-btn, .t-bleu .hx-actions .hx-btn, .hx-actions .hx-btn:has(.ar--pill), .t-bleu .hx-actions .hx-btn:has(.ar--pill){
+    justify-content:center; padding:0 6px; gap:8px;
+  }
+}
+/* Boutons du héros sur téléphone : largeur ajustée au contenu, la pastille de flèche colle au bord droit
+   comme sur ordinateur, et la paire de boutons est centrée */
+@media(max-width:560px){
+  .hx-actions{ justify-content:center; }
+  .hx-actions .hx-btn, .t-bleu .hx-actions .hx-btn, .hx-actions .hx-btn:has(.ar--pill), .t-bleu .hx-actions .hx-btn:has(.ar--pill){
+    flex:0 0 auto; padding:0 6px 0 16px; gap:8px; font-size:11.5px; letter-spacing:.03em;
+  }
+}
+@media(max-width:400px){
+  .hx-actions{ gap:8px; }
+  .hx-actions .hx-btn, .t-bleu .hx-actions .hx-btn, .hx-actions .hx-btn:has(.ar--pill), .t-bleu .hx-actions .hx-btn:has(.ar--pill){
+    padding:0 5px 0 13px; gap:6px; font-size:10.5px; letter-spacing:.02em; height:48px;
+  }
+  .hx-actions .ar--pill{ width:28px; height:28px; }
+}
