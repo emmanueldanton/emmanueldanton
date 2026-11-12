@@ -72,6 +72,41 @@ const SOFT_ICONS = {
   globe:  <React.Fragment><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></React.Fragment>,
 };
 
+/* Flèche pleine aux bouts arrondis ; d = right, down, left, up, ne (vers le haut à droite) ; pill = dans une pastille ronde */
+const ARROW_PATH = "M4.5 13.5h11.3l-4.2 4.2a1.5 1.5 0 0 0 2.1 2.1l6.8-6.8a1.5 1.5 0 0 0 0-2.1l-6.8-6.8a1.5 1.5 0 1 0-2.1 2.1l4.2 4.2H4.5a1.5 1.5 0 0 0 0 3.1z";
+function Arrow({ d, pill }) {
+  return <span className={"ar ar--" + (d || "right") + (pill ? " ar--pill" : "")} aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={ARROW_PATH} /></svg></span>;
+}
+
+/* ---------- CV : choix de la langue ---------- */
+function openCv(e) { if (e) e.preventDefault(); window.dispatchEvent(new Event("cv:open")); }
+
+function CvChooser() {
+  const [open, setOpen] = useState(false);
+  useEffect(function() {
+    function on() { setOpen(true); }
+    function key(e) { if (e.key === "Escape") setOpen(false); }
+    window.addEventListener("cv:open", on);
+    document.addEventListener("keydown", key);
+    return function() { window.removeEventListener("cv:open", on); document.removeEventListener("keydown", key); };
+  }, []);
+  if (!open) return null;
+  var close = function() { setOpen(false); };
+  return (
+    <div className="cvc" role="dialog" aria-modal="true" aria-label={tr("Quelle version de mon CV ?")} onClick={function(e) { if (e.target === e.currentTarget) close(); }}>
+      <div className="cvc-card">
+        <button type="button" className="cvc-x" onClick={close} aria-label={tr("Fermer")}>×</button>
+        <h2 className="cvc-t">{tr("Quelle version de mon CV ?")}</h2>
+        <p className="cvc-p">{tr("Choisissez la langue, le PDF se télécharge.")}</p>
+        <div className="cvc-row">
+          <a className="cvc-opt" href={D.cvFr} download onClick={close}><span className="cvc-flag">FR</span><b>Français</b><Arrow d="down" pill /></a>
+          <a className="cvc-opt" href={D.cvEn} download onClick={close}><span className="cvc-flag">EN</span><b>English</b><Arrow d="down" pill /></a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- NAV ---------- */
 function Nav({ scrolled, active, onOpenAbout }) {
   const [open, setOpen] = useState(false);
@@ -109,7 +144,7 @@ function Nav({ scrolled, active, onOpenAbout }) {
         </div>
         <div className="nav-right">
           <button type="button" className="nav-lang" aria-label={tr("Langue")} onClick={function() { switchLang(LANG === "fr" ? "en" : "fr"); }}>{LANG === "fr" ? "EN" : "FR"}</button>
-          <a href={D.cv} download className="nav-cta">{tr("Mon CV")} <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+          <a href={D.cv} className="nav-cta" onClick={openCv}>{tr("Mon CV")} <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
           <button className="nav-burger" aria-label={tr("Menu")} aria-expanded={open} onClick={() => setOpen(!open)}>
             <span></span><span></span><span></span>
           </button>
@@ -179,8 +214,8 @@ function Hero({ onOpenAbout }) {
 
         <div className="wrap">
         <div className="hx-actions">
-          <button className="hx-btn hx-btn--accent" onClick={goProjets}>{tr("Voir mes projets")} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></button>
-          <button className="hx-btn" onClick={onOpenAbout}>{tr("En savoir plus")} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></button>
+          <button className="hx-btn hx-btn--accent" onClick={goProjets}>{tr("Voir mes projets")} <Arrow d="down" pill /></button>
+          <button className="hx-btn" onClick={onOpenAbout}>{tr("En savoir plus")} <Arrow d="right" pill /></button>
         </div>
         </div>
       </section>
@@ -289,7 +324,7 @@ function SoftSkills() {
             <figcaption>
               <img src={t.photo} alt="" loading="lazy" />
               <div>
-                <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <span aria-hidden="true">↗</span></a>
+                <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <Arrow d="ne" /></a>
                 <span>{t.rl}</span>
               </div>
             </figcaption>
@@ -317,13 +352,13 @@ function DetailEnd({ next }) {
           <span className="dw-next-k">{next.k}</span>
           <span className="dw-next-t">{next.label}</span>
           <span className="dw-next-go" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            <Arrow d="right" />
           </span>
         </button>
         <div className="dw-end-bot">
           <span>© 2026 {D.name}</span>
           <span>
-            <a href={D.cv} download>{tr("Mon CV")} ↓</a>
+            <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Arrow d="down" /></a>
           </span>
         </div>
       </div>
@@ -370,7 +405,7 @@ function DetailWindow({ aria, back, counter, color, k, title, tags, panel, d, st
     <div className="proj-detail-overlay dw" role="dialog" aria-modal="true" aria-label={aria}>
       <div className={"dw-in c-" + color}>
         <div className="dw-top">
-          <button type="button" className="dw-back" onClick={onClose}><span aria-hidden="true">←</span> {back}</button>
+          <button type="button" className="dw-back" onClick={onClose}><Arrow d="left" /> {back}</button>
         </div>
 
         <header className="dw-head">
@@ -448,7 +483,7 @@ function ExperienceDetail({ x, i, onClose, onNext }) {
         <figcaption>
           <img src={t.photo} alt="" loading="lazy" />
           <div>
-            <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <span aria-hidden="true">↗</span></a>
+            <a href={t.li} target="_blank" rel="noopener noreferrer" className="sb-name">{t.nm} <Arrow d="ne" /></a>
             <span>{t.rl}</span>
           </div>
         </figcaption>
@@ -468,7 +503,7 @@ function ExperienceDetail({ x, i, onClose, onNext }) {
       d={x.detail}
       stepsLabel={tr("Comment ça s'est passé")}
       quote={quote}
-      cta={<a href="#contact" className="dw-btn dw-btn--main" onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>}
+      cta={<a href="#contact" className="dw-btn dw-btn--main" onClick={onClose}>{tr("Me contacter")} <Arrow d="right" pill /></a>}
       next={{ k: tr("Expérience suivante"), label: nx.co.split(" · ")[0], go: onNext }}
       onClose={onClose}
     />
@@ -511,7 +546,7 @@ function Experience() {
                     </ul>
                     <div className="xb-foot">
                       <div className="xb-tags">{x.tags.slice(0, 5).map(function(t) { return <span className="tag" key={t}>{t}</span>; })}</div>
-                      {x.detail && <button type="button" className="xb-btn" tabIndex={on ? 0 : -1} onClick={function() { setOpenIdx(i); }}>{tr("Détails")} <span aria-hidden="true">→</span></button>}
+                      {x.detail && <button type="button" className="xb-btn" tabIndex={on ? 0 : -1} onClick={function() { setOpenIdx(i); }}>{tr("Détails")} <Arrow d="ne" pill /></button>}
                     </div>
                   </div>
                 </div>}
@@ -552,8 +587,8 @@ function ProjectDetail({ p, onClose, onNext }) {
       stepsLabel={tr("Comment je m'y suis pris")}
       cta={
         <React.Fragment>
-          {p.url && <a href={p.url} target="_blank" rel="noreferrer" className="dw-btn dw-btn--main">{tr("Voir le projet")} <span aria-hidden="true">↗</span></a>}
-          <a href="#contact" className={"dw-btn" + (p.url ? "" : " dw-btn--main")} onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>
+          {p.url && <a href={p.url} target="_blank" rel="noreferrer" className="dw-btn dw-btn--main">{tr("Voir le projet")} <Arrow d="ne" pill /></a>}
+          <a href="#contact" className={"dw-btn" + (p.url ? "" : " dw-btn--main")} onClick={onClose}>{tr("Me contacter")} <Arrow d="right" pill /></a>
         </React.Fragment>
       }
       next={{ k: tr("Projet suivant"), label: nx.title.split(",")[0], go: function() { onNext(nx.pn); } }}
@@ -576,7 +611,7 @@ function Project({ p, i, onOpen }) {
       <div className="pb-head">
         <span className="pb-n">{p.pn}</span>
         <button type="button" className="pb-go" aria-label={tr("Voir les détails du projet ") + name}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          <Arrow d="ne" />
         </button>
       </div>
       <h3>{name}</h3>
@@ -680,7 +715,7 @@ function ContactForm() {
       <label>{tr("Votre e-mail")}<input type="email" required autoComplete="email" value={f.email} onChange={set("email")} placeholder="vous@exemple.com" /></label>
       <label>{tr("Objet")}<input type="text" required value={f.subject} onChange={set("subject")} placeholder={tr("De quoi voulez-vous parler ?")} /></label>
       <label>{tr("Message")}<textarea rows="4" required value={f.message} onChange={set("message")} placeholder={tr("Bonjour Emmanuel,")}></textarea></label>
-      <button type="submit" className="kb-send" disabled={state === "sending"}>{state === "sending" ? tr("Envoi…") : tr("Envoyer")} <span aria-hidden="true">↗</span></button>
+      <button type="submit" className="kb-send" disabled={state === "sending"}>{state === "sending" ? tr("Envoi…") : tr("Envoyer")} <Arrow d="right" pill /></button>
       {state === "error" && <p className="kb-err" role="alert">{tr("L'envoi a échoué. Réessayez dans un instant.")}</p>}
     </form>
   );
@@ -698,7 +733,7 @@ function Contact() {
               <div className="kb-links">
                 <a className="kb-soc" href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" aria-label="LinkedIn">{LOGO_LINKEDIN}</a>
                 <a className="kb-soc" href="https://github.com/emmanueldanton" target="_blank" rel="noreferrer" aria-label="GitHub">{LOGO_GITHUB}</a>
-                <a href={D.cv} download>{tr("Mon CV")} <span aria-hidden="true">↓</span></a>
+                <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Arrow d="down" /></a>
               </div>
             </div>
             <ContactForm />
@@ -729,7 +764,7 @@ function Contact() {
               <a href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" aria-label="LinkedIn">{LOGO_LINKEDIN}</a>
               <a href="https://github.com/emmanueldanton" target="_blank" rel="noreferrer" aria-label="GitHub">{LOGO_GITHUB}</a>
             </span>
-            <a href="#top" className="fc-up" onClick={function(e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{tr("Haut de page")} <span aria-hidden="true">↑</span></a>
+            <a href="#top" className="fc-up" onClick={function(e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{tr("Haut de page")} <Arrow d="up" /></a>
           </div>
         </div>
       </footer>
@@ -744,7 +779,7 @@ function AboutDetail({ onClose }) {
     <div className="proj-detail-overlay dw" role="dialog" aria-modal="true" aria-label="À propos de Emmanuel Danton">
       <div className="dw-in c-lime">
         <div className="dw-top">
-          <button type="button" className="dw-back" onClick={onClose}><span aria-hidden="true">←</span> {tr("Retour")}</button>
+          <button type="button" className="dw-back" onClick={onClose}><Arrow d="left" /> {tr("Retour")}</button>
         </div>
 
         <header className="dw-head">
@@ -773,8 +808,8 @@ function AboutDetail({ onClose }) {
         <Gallery items={D.terrain.photos} />
 
         <div className="dw-cta">
-          <a href={D.cv} download className="dw-btn dw-btn--main">{tr("Télécharger mon CV")} <span aria-hidden="true">↓</span></a>
-          <a href="#contact" className="dw-btn" onClick={onClose}>{tr("Me contacter")} <span aria-hidden="true">↗</span></a>
+          <a href={D.cv} className="dw-btn dw-btn--main" onClick={openCv}>{tr("Télécharger mon CV")} <Arrow d="down" pill /></a>
+          <a href="#contact" className="dw-btn" onClick={onClose}>{tr("Me contacter")} <Arrow d="right" pill /></a>
         </div>
       </div>
       <DetailEnd next={{ k: tr("Une idée, un projet ?"), label: tr("On se parle"), go: function() { onClose(); setTimeout(function() { var el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 60); } }} />
@@ -854,6 +889,7 @@ function App() {
       <Contact />
       {openAbout && <AboutDetail onClose={() => setOpenAbout(false)} />}
       <ScrollToTop />
+      <CvChooser />
     </React.Fragment>
   );
 }

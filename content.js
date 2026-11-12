@@ -6,7 +6,9 @@ window.PORTFOLIO = {
   role: "Ingénieur Data & IA",
   email: "defdanton41@gmail.com",
   location: "Paris, Île-de-France",
-  cv: "assets/CV_Emmanuel_DANTON.pdf",
+  cv: "assets/CV_Emmanuel_DANTON_FR.pdf",
+  cvFr: "assets/CV_Emmanuel_DANTON_FR.pdf",
+  cvEn: "assets/CV_Emmanuel_DANTON_EN.pdf",
 
   hero: {
     mission: "J'allie IA, automatisation et design pour aider les équipes à avancer plus vite.",

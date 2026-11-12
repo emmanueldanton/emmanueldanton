@@ -252,6 +252,7 @@ window.PORTFOLIO_I18N.en = {
     "Haut de page": "Back to top", "Moi, c'est Emmanuel": "Hi, I'm Emmanuel", "Télécharger mon CV": "Download my CV",
     "Voir les détails du projet ": "See the details of the project ", "Détails du projet ": "Project details: ", "Détails : ": "Details: ", " chez ": " at ",
     "Remonter en haut": "Back to top",
+    "Quelle version de mon CV ?": "Which version of my CV?", "Choisissez la langue, le PDF se télécharge.": "Pick a language, the PDF will download.", "Fermer": "Close",
     "Votre e-mail": "Your email", "Objet": "Subject", "Message": "Message", "Envoyer": "Send", "Envoi…": "Sending…",
     "De quoi voulez-vous parler ?": "What would you like to talk about?", "Bonjour Emmanuel,": "Hello Emmanuel,",
     "Message envoyé.": "Message sent.", "Merci, je vous réponds vite.": "Thank you, I will reply soon.", "L'envoi a échoué. Réessayez dans un instant.": "Sending failed. Please try again in a moment.", "Menu": "Menu", "Langue": "Language",
