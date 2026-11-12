@@ -1830,3 +1830,10 @@ img.hx-spark--1.hx-chart{ top:-14%; right:-12%; }
 .cvc-opt .ar--pill{ background:var(--ink); color:#fff; width:30px; height:30px; }
 @media(max-width:420px){ .cvc-row{ grid-template-columns:1fr; } }
 @media(prefers-reduced-motion:reduce){ .cvc, .cvc-card{ animation:none; } }
+
+/* Téléchargement et retour en haut, dans la même famille de flèches */
+.ar--dl svg{ transform:none; }
+.nav-cta .ar svg{ width:13px; height:13px; }
+.kb-links .ar--dl svg{ width:14px; height:14px; }
+:is(.dw-btn, .cvc-opt):hover .ar--dl.ar--pill svg{ transform:translateY(2px); }
+.scroll-top .ar svg{ width:16px; height:16px; }

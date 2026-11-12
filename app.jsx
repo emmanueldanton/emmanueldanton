@@ -78,6 +78,11 @@ function Arrow({ d, pill }) {
   return <span className={"ar ar--" + (d || "right") + (pill ? " ar--pill" : "")} aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={ARROW_PATH} /></svg></span>;
 }
 
+/* Téléchargement : flèche vers un plateau, même famille que Arrow */
+function Dl({ pill }) {
+  return <span className={"ar ar--dl" + (pill ? " ar--pill" : "")} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3.6v10.6"/><path d="m7 9.6 5 5 5-5"/><path d="M5 20.4h14"/></svg></span>;
+}
+
 /* ---------- CV : choix de la langue ---------- */
 function openCv(e) { if (e) e.preventDefault(); window.dispatchEvent(new Event("cv:open")); }
 
@@ -99,8 +104,8 @@ function CvChooser() {
         <h2 className="cvc-t">{tr("Quelle version de mon CV ?")}</h2>
         <p className="cvc-p">{tr("Choisissez la langue, le PDF se télécharge.")}</p>
         <div className="cvc-row">
-          <a className="cvc-opt" href={D.cvFr} download onClick={close}><span className="cvc-flag">FR</span><b>Français</b><Arrow d="down" pill /></a>
-          <a className="cvc-opt" href={D.cvEn} download onClick={close}><span className="cvc-flag">EN</span><b>English</b><Arrow d="down" pill /></a>
+          <a className="cvc-opt" href={D.cvFr} download onClick={close}><span className="cvc-flag">FR</span><b>Français</b><Dl pill /></a>
+          <a className="cvc-opt" href={D.cvEn} download onClick={close}><span className="cvc-flag">EN</span><b>English</b><Dl pill /></a>
         </div>
       </div>
     </div>
@@ -144,7 +149,7 @@ function Nav({ scrolled, active, onOpenAbout }) {
         </div>
         <div className="nav-right">
           <button type="button" className="nav-lang" aria-label={tr("Langue")} onClick={function() { switchLang(LANG === "fr" ? "en" : "fr"); }}>{LANG === "fr" ? "EN" : "FR"}</button>
-          <a href={D.cv} className="nav-cta" onClick={openCv}>{tr("Mon CV")} <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+          <a href={D.cv} className="nav-cta" onClick={openCv}>{tr("Mon CV")} <Dl /></a>
           <button className="nav-burger" aria-label={tr("Menu")} aria-expanded={open} onClick={() => setOpen(!open)}>
             <span></span><span></span><span></span>
           </button>
@@ -358,7 +363,7 @@ function DetailEnd({ next }) {
         <div className="dw-end-bot">
           <span>© 2026 {D.name}</span>
           <span>
-            <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Arrow d="down" /></a>
+            <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Dl /></a>
           </span>
         </div>
       </div>
@@ -733,7 +738,7 @@ function Contact() {
               <div className="kb-links">
                 <a className="kb-soc" href="https://linkedin.com/in/emmanueldanton" target="_blank" rel="noreferrer" aria-label="LinkedIn">{LOGO_LINKEDIN}</a>
                 <a className="kb-soc" href="https://github.com/emmanueldanton" target="_blank" rel="noreferrer" aria-label="GitHub">{LOGO_GITHUB}</a>
-                <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Arrow d="down" /></a>
+                <a href={D.cv} onClick={openCv}>{tr("Mon CV")} <Dl /></a>
               </div>
             </div>
             <ContactForm />
@@ -808,7 +813,7 @@ function AboutDetail({ onClose }) {
         <Gallery items={D.terrain.photos} />
 
         <div className="dw-cta">
-          <a href={D.cv} className="dw-btn dw-btn--main" onClick={openCv}>{tr("Télécharger mon CV")} <Arrow d="down" pill /></a>
+          <a href={D.cv} className="dw-btn dw-btn--main" onClick={openCv}>{tr("Télécharger mon CV")} <Dl pill /></a>
           <a href="#contact" className="dw-btn" onClick={onClose}>{tr("Me contacter")} <Arrow d="right" pill /></a>
         </div>
       </div>
@@ -832,9 +837,7 @@ function ScrollToTop() {
       onClick={goTop}
       aria-label={tr("Remonter en haut")}
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <polyline points="18 15 12 9 6 15"/>
-      </svg>
+      <Arrow d="up" />
     </button>
   );
 }
