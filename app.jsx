@@ -655,7 +655,7 @@ const LOGO_GITHUB = <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="tr
 /* Formulaire de contact.
    Avec une clé Web3Forms (web3forms.com, gratuit), le message part directement et l'adresse reste invisible.
    Sans clé, le bouton ouvre la messagerie du visiteur avec l'objet et le texte déjà remplis. */
-const FORM_KEY = "";
+const FORM_KEY = "ee55c15c-44a1-45e7-9df9-3ed24f17afd6";
 
 function ContactForm() {
   const [f, setF] = useState({ email: "", subject: "", message: "" });
