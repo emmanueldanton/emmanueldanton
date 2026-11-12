@@ -157,8 +157,8 @@ function Hero({ onOpenAbout }) {
           <div className="hx-figure">
             <div className="hx-disc"></div>
             <div className="hx-cut"><img src="assets/photos/hero-detoure.webp" alt={D.hero.photoAlt} /></div>
-            {BLEU ? <img className="hx-spark hx-spark--1" src="assets/photos/etoile-3d.webp" alt="" /> : <svg className="hx-spark hx-spark--1" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
-            {BLEU ? <img className="hx-spark hx-spark--2" src="assets/photos/etoile-3d.webp" alt="" /> : <svg className="hx-spark hx-spark--2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
+            {BLEU ? <img className="hx-spark hx-spark--1 hx-chart" src="assets/photos/chart-bars.webp" alt="" /> : <svg className="hx-spark hx-spark--1" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
+            {BLEU ? <img className="hx-spark hx-spark--2 hx-chart" src="assets/photos/chart-donut.webp" alt="" /> : <svg className="hx-spark hx-spark--2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d={spark}/></svg>}
           </div>
 
           <div className="hx-tags">
@@ -418,8 +418,15 @@ function DetailWindow({ aria, back, counter, color, k, title, tags, panel, d, st
 }
 
 /* ---------- EXPERIENCE DETAIL OVERLAY ---------- */
+/* expérience suivante qui a une fenêtre de détail (Ipsos n'en a pas, par discrétion) */
+function nextXp(i) {
+  var n = D.experience.length;
+  for (var k = 1; k <= n; k++) { var j = (i + k) % n; if (!D.experience[j].discret) return j; }
+  return i;
+}
+
 function ExperienceDetail({ x, i, onClose, onNext }) {
-  var nx = D.experience[(i + 1) % D.experience.length];
+  var nx = D.experience[nextXp(i)];
   var parts = x.co.split(" · ");
   var t = D.testimonial;
   var panel = (
@@ -493,11 +500,11 @@ function Experience() {
                 onClick={function() { setAct(i); }}
               >
                 <div className="xb-line">
-                  <span className="xb-when">{x.yr}</span>
+                  <span className="xb-when">{x.yr}{x.discret && x.logo && <span className="xb-mark"><img src={x.logo} alt={x.co.split(" · ")[0]} /></span>}</span>
                   <h3>{x.role}</h3>
                   <span className="xb-co">{parts[0]}{x.live && <i>{tr("En poste")}</i>}</span>
                 </div>
-                <div className="xb-more">
+                {!x.discret && <div className="xb-more">
                   <div>
                     <ul>
                       {x.bullets.map(function(b) { return <li key={b}>{b}</li>; })}
@@ -507,14 +514,14 @@ function Experience() {
                       {x.detail && <button type="button" className="xb-btn" tabIndex={on ? 0 : -1} onClick={function() { setOpenIdx(i); }}>{tr("Détails")} <span aria-hidden="true">→</span></button>}
                     </div>
                   </div>
-                </div>
+                </div>}
               </article>
               </div>
             );
           })}
         </div>
       </div>
-      {openXp && <ExperienceDetail key={openIdx} x={openXp} i={openIdx} onClose={function() { setOpenIdx(null); }} onNext={function() { setOpenIdx((openIdx + 1) % D.experience.length); }} />}
+      {openXp && <ExperienceDetail key={openIdx} x={openXp} i={openIdx} onClose={function() { setOpenIdx(null); }} onNext={function() { setOpenIdx(nextXp(openIdx)); }} />}
     </section>
   );
 }
