@@ -225,7 +225,7 @@ function Hero({ onOpenAbout }) {
         </div>
       </section>
 
-      {/* Marquee skills ·séparé du hero */}
+      {/* bande des compétences, sous le héros */}
       <div className="hero-marquee">
         <div className="track">
           {[0, 1].map(function(k) {
@@ -467,7 +467,7 @@ function nextXp(i) {
 
 function ExperienceDetail({ x, i, onClose, onNext }) {
   var nx = D.experience[nextXp(i)];
-  var parts = x.co.split(" · ");
+  var parts = x.co.split(" - ");
   var t = D.testimonial;
   var panel = (
     <div className="dw-panel dw-panel--xp">
@@ -476,7 +476,7 @@ function ExperienceDetail({ x, i, onClose, onNext }) {
         {x.logo && <span className="dw-logo"><img src={x.logo} alt="" /></span>}
         <b className="dw-co">{parts[0]}</b>
       </div>
-      <span className="dw-when">{x.yr}{parts[1] ? " · " + parts[1] : ""}</span>
+      <span className="dw-when">{x.yr}{parts[1] ? " - " + parts[1] : ""}</span>
     </div>
   );
   var quote = x.detail.quote ? (
@@ -501,7 +501,7 @@ function ExperienceDetail({ x, i, onClose, onNext }) {
       back={tr("Retour aux expériences")}
       counter={String(i + 1).padStart(2, "0") + " / " + String(D.experience.length).padStart(2, "0")}
       color={XP_PAL[i % XP_PAL.length]}
-      k={parts[0] + " · " + x.ph}
+      k={parts[0] + " - " + x.ph}
       title={x.role}
       tags={x.tags}
       panel={panel}
@@ -509,7 +509,7 @@ function ExperienceDetail({ x, i, onClose, onNext }) {
       stepsLabel={tr("Comment ça s'est passé")}
       quote={quote}
       cta={<a href="#contact" className="dw-btn dw-btn--main" onClick={onClose}>{tr("Me contacter")} <Arrow d="right" pill /></a>}
-      next={{ k: tr("Expérience suivante"), label: nx.co.split(" · ")[0], go: onNext }}
+      next={{ k: tr("Expérience suivante"), label: nx.co.split(" - ")[0], go: onNext }}
       onClose={onClose}
     />
   );
@@ -528,7 +528,7 @@ function Experience() {
         <STitle k={tr("Expériences")} c="violet" a={tr("Où j'ai")} m={tr("travaillé")} />
         <div className="xb">
           {D.experience.map(function(x, i) {
-            var parts = x.co.split(" · ");
+            var parts = x.co.split(" - ");
             var on = act === i;
             return (
               <div key={i} data-reveal style={{ "--d": i * 80 + "ms" }}>
@@ -540,7 +540,7 @@ function Experience() {
                 onClick={function() { setAct(i); }}
               >
                 <div className="xb-line">
-                  <span className="xb-when">{x.yr}{x.discret && x.logo && <span className="xb-mark"><img src={x.logo} alt={x.co.split(" · ")[0]} /></span>}</span>
+                  <span className="xb-when">{x.yr}{x.discret && x.logo && <span className="xb-mark"><img src={x.logo} alt={x.co.split(" - ")[0]} /></span>}</span>
                   <h3>{x.role}</h3>
                   <span className="xb-co">{parts[0]}{x.live && <i>{tr("En poste")}</i>}</span>
                 </div>

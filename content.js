@@ -15,9 +15,9 @@ window.PORTFOLIO = {
     lead: "Chef de projet junior chez Ipsos BVA, dans l'équipe Expérience Client & Plateformes, et étudiant en cycle ingénieur Data & IA à l'ECE Paris. Ce que j'aime, c'est trouver une solution simple à un problème.",
     photoAlt: "Portrait d'Emmanuel Danton",
     tags: {
-      poste: { v: "Chef de projet junior", k: "Ipsos BVA · expérience client" },
+      poste: { v: "Chef de projet junior", k: "Ipsos BVA - expérience client" },
       capteurs: "1 200+ capteurs IoT suivis",
-      ventes: { v: "361", k: "ventes · Hupple Store" },
+      ventes: { v: "361", k: "ventes - Hupple Store" },
     },
   },
 
@@ -51,7 +51,7 @@ window.PORTFOLIO = {
       logo: "assets/ipsos.svg",
       ph: "Alternance",
       role: "Chef de projet junior Plateformes IT",
-      co: "Ipsos BVA · Paris",
+      co: "Ipsos BVA - Paris",
       bullets: [
         "Je fais tourner, avec l'équipe, les programmes d'expérience client de nos clients sur Medallia",
         "J'utilise Medallia au quotidien et j'en approfondis les fonctions avancées",
@@ -75,11 +75,11 @@ window.PORTFOLIO = {
       },
     },
     {
-      yr: "Mars › Juin 2026",
+      yr: "Mars - Juin 2026",
       logo: "assets/cad42.png",
       ph: "Stage 4 mois",
       role: "Data Analyst",
-      co: "CAD.42 Services · Rueil-Malmaison",
+      co: "CAD.42 Services - Rueil-Malmaison",
       bullets: [
         "J'ai déployé un tableau de bord temps réel pour 1 200+ capteurs IoT sur 100+ chantiers",
         "J'ai créé des scores de santé par projet pour anticiper les pannes sur le terrain",
@@ -104,12 +104,12 @@ window.PORTFOLIO = {
       },
     },
     {
-      yr: "Juin › Août 2025",
+      yr: "Juin - Août 2025",
       logo: "assets/it.png",
       featured: true,
       ph: "Stage 2 mois",
       role: "Data Analyst & Product Management",
-      co: "InspiraTec · Courbevoie",
+      co: "InspiraTec - Courbevoie",
       bullets: [
         "J'ai développé le MVP d'une plateforme de recrutement tech, avec un matching automatisé sous n8n",
         "J'ai automatisé la collecte de 50+ offres et profils qualifiés par jour",
@@ -190,7 +190,7 @@ window.PORTFOLIO = {
   projects: [
     {
       pn: "01",
-      client: "Erasmus+ · Université de Saragosse · juillet 2026",
+      client: "Erasmus+ - Université de Saragosse - juillet 2026",
       title: "CaRental, réduire les coûts sans faire attendre",
       desc: "Projet Erasmus+ à l'Université de Saragosse. Une agence de location d'aéroport voulait savoir quelle flotte de navettes coûte le moins cher tout en gardant au moins 85 % de clients satisfaits. En équipe internationale de quatre, nous avons simulé plus de 100 scénarios pour aboutir à une configuration à 6,54 € par client.",
       tags: ["JaamSim", "Simulation", "Python", "Optimisation", "Anglais"],
@@ -223,7 +223,7 @@ window.PORTFOLIO = {
     },
     {
       pn: "02",
-      client: "Mon entreprise · depuis fév. 2026",
+      client: "Mon entreprise - depuis fév. 2026",
       title: "Hupple Store, data e-commerce",
       desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. 361 ventes et 321 clients à ce jour.",
       tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
@@ -251,7 +251,7 @@ window.PORTFOLIO = {
     },
     {
       pn: "03",
-      client: "Projet personnel · 2026",
+      client: "Projet personnel - 2026",
       title: "MyFinanx, gestion financière",
       desc: "Application de budget que j'ai conçue et développée seul. Le besoin : suivre ses dépenses sans créer de compte ni confier ses données. Elle s'installe sur téléphone, propose des conseils par IA et lit les tickets de caisse.",
       tags: ["PWA", "JavaScript", "Vite", "IA", "Scan de tickets"],
@@ -283,7 +283,7 @@ window.PORTFOLIO = {
     },
     {
       pn: "04",
-      client: "International · avril 2025, Belgique",
+      client: "International - avril 2025, Belgique",
       title: "Football analytics, OHL",
       desc: "Lors de la BUSIT Week de l'UC Leuven-Limburg, en Belgique, j'ai analysé avec une équipe internationale les données de performance du club OH Leuven, puis nous avons présenté nos recommandations à un panel d'experts du club.",
       tags: ["Python", "Pandas", "Seaborn", "SQL", "Anglais"],
@@ -329,16 +329,16 @@ window.PORTFOLIO = {
   testimonial: {
     q: "Il possède cette rare double compétence : une vision Product Manager centrée sur l'utilisateur et une rigueur de Data Engineer pour l'exécution technique. Autonome, analytique et force de proposition, il a su transformer nos données en leviers stratégiques concrets. Je le recommande vivement.",
     nm: "Massiva Atmani",
-    rl: "Head of Business · InspiraTec",
-    meta: "Responsable directe · Stage juin à août 2025",
+    rl: "Head of Business - InspiraTec",
+    meta: "Responsable directe - Stage juin à août 2025",
     photo: "assets/massiva.png",
     li: "https://www.linkedin.com/in/massivaatmani/",
   },
 
   education: [
-    { yr: "2026 › 2029", deg: "Cycle Ingénieur Data & IA", sch: "École Centrale d'Électronique (ECE) · Paris", country: "France", logo: "assets/ece.png" },
-    { yr: "2023 › 2026", deg: "BUT Science des données", sch: "IUT de Villetaneuse · Université Sorbonne Paris Nord", country: "France", logo: "assets/iut.png" },
-    { yr: "2021 › 2024", deg: "Licence, Sécurité & Réseau informatique", sch: "Les Cours Sonou · Bénin", country: "Bénin", logo: "assets/lcs.png" },
+    { yr: "2026 - 2029", deg: "Cycle Ingénieur Data & IA", sch: "École Centrale d'Électronique (ECE) - Paris", country: "France", logo: "assets/ece.png" },
+    { yr: "2023 - 2026", deg: "BUT Science des données", sch: "IUT de Villetaneuse - Université Sorbonne Paris Nord", country: "France", logo: "assets/iut.png" },
+    { yr: "2021 - 2024", deg: "Licence, Sécurité & Réseau informatique", sch: "Les Cours Sonou - Bénin", country: "Bénin", logo: "assets/lcs.png" },
   ],
 
   contactLead: "Un projet, une question, ou juste envie de parler data, IA ou design ? Écrivez-moi, je réponds sous 48 h.",

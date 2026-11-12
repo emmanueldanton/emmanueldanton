@@ -1837,3 +1837,7 @@ img.hx-spark--1.hx-chart{ top:-14%; right:-12%; }
 .kb-links .ar--dl svg{ width:14px; height:14px; }
 :is(.dw-btn, .cvc-opt):hover .ar--dl.ar--pill svg{ transform:translateY(2px); }
 .scroll-top .ar svg{ width:16px; height:16px; }
+
+/* Liens avec icône : texte et icône toujours sur la même ligne */
+a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
+.dw-end-bot a, .kb-links a, .fc-up, .sb-name{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }

@@ -10,9 +10,9 @@ window.PORTFOLIO_I18N.en = {
       lead: "Junior Project Manager at Ipsos BVA, in the Customer Experience & Platforms team, and Data & AI engineering student at ECE Paris. What I enjoy most is finding a simple solution to a problem.",
       photoAlt: "Portrait of Emmanuel Danton",
       tags: {
-        poste: { v: "Junior Project Manager", k: "Ipsos BVA · customer experience" },
+        poste: { v: "Junior Project Manager", k: "Ipsos BVA - customer experience" },
         capteurs: "1,200+ IoT sensors monitored",
-        ventes: { k: "sales · Hupple Store" },
+        ventes: { k: "sales - Hupple Store" },
       },
     },
     marquee: ["Data analysis", "Data visualisation", "Graphic design", "Adobe Suite", "Automation", "Artificial intelligence", "Project management", "Customer experience", "Dashboards", "Content creation", "Data storytelling", "UI design"],
@@ -55,7 +55,7 @@ window.PORTFOLIO_I18N.en = {
         },
       },
       {
-        yr: "March › June 2026", ph: "4-month internship", role: "Data Analyst",
+        yr: "March - June 2026", ph: "4-month internship", role: "Data Analyst",
         bullets: [
           "I deployed a real-time dashboard for 1,200+ IoT sensors across 100+ construction sites",
           "I created health scores per project to anticipate failures in the field",
@@ -79,7 +79,7 @@ window.PORTFOLIO_I18N.en = {
         },
       },
       {
-        yr: "June › Aug. 2025", ph: "2-month internship", role: "Data Analyst & Product Management",
+        yr: "June - Aug. 2025", ph: "2-month internship", role: "Data Analyst & Product Management",
         bullets: [
           "I built the MVP of a tech recruitment platform, with automated matching in n8n",
           "I automated the collection of 50+ qualified offers and profiles a day",
@@ -118,7 +118,7 @@ window.PORTFOLIO_I18N.en = {
     ],
     projects: [
       {
-        client: "Erasmus+ · University of Zaragoza · July 2026",
+        client: "Erasmus+ - University of Zaragoza - July 2026",
         title: "CaRental, cutting costs without making customers wait",
         desc: "Erasmus+ project at the University of Zaragoza. An airport rental agency wanted to know which shuttle fleet costs the least while keeping at least 85% of customers satisfied. In an international team of four, we simulated more than 100 scenarios and arrived at a configuration at €6.54 per customer.",
         tags: ["JaamSim", "Simulation", "Python", "Optimisation", "English"],
@@ -146,7 +146,7 @@ window.PORTFOLIO_I18N.en = {
         },
       },
       {
-        client: "My business · since Feb. 2026",
+        client: "My business - since Feb. 2026",
         title: "Hupple Store, e-commerce data",
         desc: "An e-commerce shop for French-speaking Africa that I am building on my own. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, with orders automated in n8n. 361 sales and 321 customers so far.",
         tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
@@ -165,7 +165,7 @@ window.PORTFOLIO_I18N.en = {
         },
       },
       {
-        client: "Personal project · 2026",
+        client: "Personal project - 2026",
         title: "MyFinanx, personal finance",
         desc: "A budget app I designed and built on my own. The need: track spending without creating an account or handing over your data. It installs on a phone, gives AI advice and reads receipts.",
         tags: ["PWA", "JavaScript", "Vite", "AI", "Receipt scanning"],
@@ -188,7 +188,7 @@ window.PORTFOLIO_I18N.en = {
         },
       },
       {
-        client: "International · April 2025, Belgium",
+        client: "International - April 2025, Belgium",
         title: "Football analytics, OHL",
         desc: "During the BUSIT Week at UC Leuven-Limburg, in Belgium, I analysed the performance data of the OH Leuven club with an international team, then we presented our recommendations to a panel of the club's experts.",
         tags: ["Python", "Pandas", "Seaborn", "SQL", "English"],
@@ -220,13 +220,13 @@ window.PORTFOLIO_I18N.en = {
     },
     testimonial: {
       q: "He has that rare dual skill: a Product Manager's vision focused on the user, and a Data Engineer's rigour in technical execution. Autonomous, analytical and proactive, he turned our data into concrete strategic levers. I highly recommend him.",
-      rl: "Head of Business · InspiraTec (translated from French)",
-      meta: "Direct manager · Internship, June to August 2025",
+      rl: "Head of Business - InspiraTec (translated from French)",
+      meta: "Direct manager - Internship, June to August 2025",
     },
     education: [
-      { deg: "Engineering degree, Data & AI", sch: "École Centrale d'Électronique (ECE) · Paris" },
-      { deg: "Bachelor (BUT) in Data Science", sch: "IUT de Villetaneuse · Université Sorbonne Paris Nord" },
-      { deg: "Bachelor's degree, IT Security & Networks", sch: "Les Cours Sonou · Benin" },
+      { deg: "Engineering degree, Data & AI", sch: "École Centrale d'Électronique (ECE) - Paris" },
+      { deg: "Bachelor (BUT) in Data Science", sch: "IUT de Villetaneuse - Université Sorbonne Paris Nord" },
+      { deg: "Bachelor's degree, IT Security & Networks", sch: "Les Cours Sonou - Benin" },
     ],
     contactLead: "A project, a question, or just want to talk data, AI or design? Write to me, I reply within 48 hours.",
     social: [{}, {}, { label: "Email" }],
@@ -248,7 +248,7 @@ window.PORTFOLIO_I18N.en = {
     "Me contacter": "Contact me", "Voir le projet": "See the project",
     "Expérience suivante": "Next experience", "Projet suivant": "Next project",
     "On se parle ?": "Let's talk?", "On se parle": "Let's talk", "Une idée, un projet ?": "An idea, a project?",
-    "ÉCRIVEZ-MOI · JE RÉPONDS SOUS 48 H · ": "WRITE TO ME · I REPLY WITHIN 48 HOURS · ",
+    "ÉCRIVEZ-MOI - JE RÉPONDS SOUS 48 H - ": "WRITE TO ME - I REPLY WITHIN 48 HOURS - ",
     "Haut de page": "Back to top", "Moi, c'est Emmanuel": "Hi, I'm Emmanuel", "Télécharger mon CV": "Download my CV",
     "Voir les détails du projet ": "See the details of the project ", "Détails du projet ": "Project details: ", "Détails : ": "Details: ", " chez ": " at ",
     "Remonter en haut": "Back to top",
