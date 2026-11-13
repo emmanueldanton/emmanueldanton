@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /scraps/
+
+Sitemap: https://emmanueldanton.me/sitemap.xml
