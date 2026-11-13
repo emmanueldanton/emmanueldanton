@@ -83,6 +83,52 @@ function Dl({ pill }) {
   return <span className={"ar ar--dl" + (pill ? " ar--pill" : "")} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3.6v10.6"/><path d="m7 9.6 5 5 5-5"/><path d="M5 20.4h14"/></svg></span>;
 }
 
+/* ---------- Agrandir une image ---------- */
+const ZOOM_SEL = ".dw-gal img, .dw-panel img";
+
+function Zoom() {
+  const [z, setZ] = useState(null);
+  useEffect(function() {
+    function onClick(e) {
+      var img = e.target.closest && e.target.closest(ZOOM_SEL);
+      if (!img) return;
+      e.preventDefault();
+      var group = img.closest(".dw-gal") || img.closest(".dw-panel");
+      var list = [].slice.call(group.querySelectorAll("img")).map(function(i) {
+        var f = i.closest("figure"), c = f && f.querySelector("figcaption");
+        return { src: i.currentSrc || i.src, alt: i.alt, cap: c ? c.textContent : "" };
+      });
+      setZ({ list: list, i: Math.max(0, list.findIndex(function(x) { return x.src === (img.currentSrc || img.src); })) });
+    }
+    document.addEventListener("click", onClick);
+    return function() { document.removeEventListener("click", onClick); };
+  }, []);
+  useEffect(function() {
+    if (!z) return;
+    function onKey(e) {
+      if (e.key === "Escape") { e.stopImmediatePropagation(); setZ(null); }
+      if (e.key === "ArrowRight") setZ(function(v) { return v && { list: v.list, i: (v.i + 1) % v.list.length }; });
+      if (e.key === "ArrowLeft") setZ(function(v) { return v && { list: v.list, i: (v.i - 1 + v.list.length) % v.list.length }; });
+    }
+    document.addEventListener("keydown", onKey, true);
+    return function() { document.removeEventListener("keydown", onKey, true); };
+  }, [z]);
+  if (!z) return null;
+  var cur = z.list[z.i], many = z.list.length > 1;
+  var go = function(d) { return function(e) { e.stopPropagation(); setZ({ list: z.list, i: (z.i + d + z.list.length) % z.list.length }); }; };
+  return (
+    <div className="zm" role="dialog" aria-modal="true" aria-label={cur.alt || tr("Image")} onClick={function() { setZ(null); }}>
+      <button type="button" className="zm-x" aria-label={tr("Fermer")} onClick={function() { setZ(null); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      {many && <button type="button" className="zm-nav zm-prev" aria-label={tr("Image précédente")} onClick={go(-1)}><Arrow d="left" /></button>}
+      <figure className="zm-fig" onClick={function(e) { e.stopPropagation(); }}>
+        <img src={cur.src} alt={cur.alt} />
+        {cur.cap && <figcaption>{cur.cap}</figcaption>}
+      </figure>
+      {many && <button type="button" className="zm-nav zm-next" aria-label={tr("Image suivante")} onClick={go(1)}><Arrow d="right" /></button>}
+    </div>
+  );
+}
+
 /* ---------- CV : choix de la langue ---------- */
 function openCv(e) { if (e) e.preventDefault(); window.dispatchEvent(new Event("cv:open")); }
 
@@ -100,7 +146,7 @@ function CvChooser() {
   return (
     <div className="cvc" role="dialog" aria-modal="true" aria-label={tr("Quelle version de mon CV ?")} onClick={function(e) { if (e.target === e.currentTarget) close(); }}>
       <div className="cvc-card">
-        <button type="button" className="cvc-x" onClick={close} aria-label={tr("Fermer")}>×</button>
+        <button type="button" className="cvc-x" onClick={close} aria-label={tr("Fermer")}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
         <h2 className="cvc-t">{tr("Quelle version de mon CV ?")}</h2>
         <p className="cvc-p">{tr("Choisissez la langue, le PDF se télécharge.")}</p>
         <div className="cvc-row">
@@ -116,6 +162,23 @@ function CvChooser() {
 function Nav({ scrolled, active, onOpenAbout }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const navRef = useRef(null);
+
+  useEffect(function() {
+    if (!open) return;
+    var y0 = window.scrollY;
+    function onScroll() { if (Math.abs(window.scrollY - y0) > 12) setOpen(false); }
+    function onDown(e) { if (navRef.current && !navRef.current.contains(e.target)) setOpen(false); }
+    function onKey(e) { if (e.key === "Escape") setOpen(false); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return function() {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   function handleLink(e, id) {
     e.preventDefault();
@@ -139,7 +202,7 @@ function Nav({ scrolled, active, onOpenAbout }) {
   }
 
   return (
-    <nav className={"nav" + (scrolled ? " scrolled" : "") + (open ? " open" : "")}>
+    <nav ref={navRef} className={"nav" + (scrolled ? " scrolled" : "") + (open ? " open" : "")}>
       <div className="wrap">
         <a href="#top" className="brand" onClick={handleBrand}><span className="dot"></span>E. Danton</a>
         <div className="nav-links">
@@ -390,10 +453,10 @@ function Gallery({ items }) {
   return (
     <React.Fragment>
       <h3 className="dw-sub">{tr("En images")}</h3>
-      <div className={"dw-gal dw-gal--" + items.length}>
+      <div className="dw-gal dw-gal--grid">
         {items.map(function(g) {
           return (
-            <figure key={g.src} className={g.contain ? "is-contain" : ""}>
+            <figure key={g.src} className={[g.contain ? "is-contain" : "", g.wide ? "is-wide" : "", g.half ? "is-half" : ""].join(" ").trim()}>
               <img src={g.src} alt={g.alt} loading="lazy" style={g.pos ? { objectPosition: g.pos } : undefined} />
               {g.cap && <figcaption>{g.cap}</figcaption>}
             </figure>
@@ -893,6 +956,7 @@ function App() {
       {openAbout && <AboutDetail onClose={() => setOpenAbout(false)} />}
       <ScrollToTop />
       <CvChooser />
+      <Zoom />
     </React.Fragment>
   );
 }

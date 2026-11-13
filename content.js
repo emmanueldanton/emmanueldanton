@@ -223,7 +223,7 @@ window.PORTFOLIO = {
     },
     {
       pn: "02",
-      client: "Mon entreprise - depuis fév. 2026",
+      client: "Projet personnel - depuis fév. 2026",
       title: "Hupple Store, data e-commerce",
       desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. Plus de 360 ventes et 320 clients.",
       tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
@@ -234,7 +234,7 @@ window.PORTFOLIO = {
       logo: "assets/hupple-logo.png",
       detail: {
         brief: "J'ai lancé Hupple Store pour vendre des guides numériques en Afrique francophone, avec un budget publicitaire limité. Il fallait que les commandes se traitent seules et que chaque décision repose sur des chiffres. C'est aussi mon terrain de jeu : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles.",
-        role: "Fondateur. Je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, ainsi que les automatisations.",
+        role: "Un projet que je mène seul. Je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, ainsi que les automatisations.",
         result: "Plus de 360 ventes et 320 clients, surtout dans 14 pays africains.",
         steps: [
           { n: "01", title: "Attirer les bons clients", desc: "Je lance et pilote les campagnes publicitaires Meta, pays par pays, et j'écris les textes des annonces et des pages produits." },
@@ -248,8 +248,9 @@ window.PORTFOLIO = {
           { v: "14", k: "pays africains" },
         ],
         gallery: [
-          { src: "assets/projets/hupple-tableau.jpg", alt: "Tableau de bord de suivi des ventes de Hupple Store : ventes par mois, part des ventes par pays, heures d'achat", cap: "Mon tableau de bord de suivi des ventes (données réelles, en volumes et en pourcentages)" },
-          { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store", cap: "La boutique en ligne" },
+          { src: "assets/projets/hupple-tableau.jpg", alt: "Tableau de bord de suivi des ventes de Hupple Store : ventes par mois, part des ventes par pays, heures d'achat", cap: "Mon tableau de bord de suivi des ventes (données réelles, en volumes et en pourcentages)", wide: true },
+          { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store", cap: "La boutique en ligne", half: true },
+          { src: "assets/projets/hupple-avis-client.jpg", alt: "Capture WhatsApp d'un message de cliente après la réception de ses ebooks", cap: "Un avis client reçu sur WhatsApp", half: true, contain: true },
         ],
       },
     },
@@ -280,9 +281,13 @@ window.PORTFOLIO = {
           { v: "IA", k: "des conseils sur le budget" },
         ],
         gallery: [
-          { src: "assets/projets/myfinanx-desktop.jpg", alt: "Tableau de bord de MyFinanx sur ordinateur, avec des données de démonstration", cap: "Le tableau de bord sur ordinateur (données de démonstration)" },
+          { src: "assets/projets/myfinanx-desktop.jpg", alt: "Tableau de bord de MyFinanx sur ordinateur, avec des données de démonstration", cap: "Le tableau de bord sur ordinateur (données de démonstration)", wide: true },
           { src: "assets/projets/myfinanx-mobile.jpg", alt: "MyFinanx sur téléphone, avec des données de démonstration", cap: "La même application sur téléphone", contain: true },
           { src: "assets/projets/myfinanx-ia.jpg", alt: "Le conseiller IA de MyFinanx répond à une question sur le budget, avec des données de démonstration", cap: "Le conseiller IA, qui répond à partir du budget (données de démonstration)", contain: true },
+          { src: "assets/projets/myfinanx-budget.jpg", alt: "Onglet Budget de MyFinanx : revenus et postes de dépenses", cap: "Le planning budgétaire, avec la répartition par IA", contain: true },
+          { src: "assets/projets/myfinanx-depenses.jpg", alt: "Onglet Dépenses de MyFinanx : total du mois et répartition par catégorie", cap: "Les dépenses du mois, par catégorie", contain: true },
+          { src: "assets/projets/myfinanx-objectifs.jpg", alt: "Onglet Objectifs de MyFinanx : fonds d'urgence et projet de voyage", cap: "Les objectifs d'épargne", contain: true },
+          { src: "assets/projets/myfinanx-stats.jpg", alt: "Écran Statistiques de MyFinanx : revenus, dépenses, taux d'épargne et répartition", cap: "Les statistiques : revenus, dépenses et taux d'épargne", contain: true },
         ],
       },
     },
@@ -312,10 +317,6 @@ window.PORTFOLIO = {
           { v: "5", k: "personnes dans l'équipe" },
           { v: "1", k: "saison complète de données" },
           { v: "EN", k: "présentation en anglais" },
-        ],
-        gallery: [
-          { src: "assets/projets/ohl-mi-temps-1.jpg", alt: "Carte de chaleur des actions réussies d'OH Leuven en première mi-temps", cap: "Actions réussies d'OH Leuven, première mi-temps" },
-          { src: "assets/projets/ohl-mi-temps-2.jpg", alt: "Carte de chaleur des actions réussies d'OH Leuven en deuxième mi-temps", cap: "Actions réussies d'OH Leuven, deuxième mi-temps" },
         ],
       },
     },

@@ -1871,3 +1871,45 @@ a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
 .dw-gal--2 figure:first-child:has(img[src*="hupple-tableau"]){ grid-column:1 / -1; }
 .dw-gal img[src*="hupple-tableau"]{ aspect-ratio:auto; }
 .dw-gal--3 img{ aspect-ratio:3 / 4; object-fit:contain; padding:14px 10px; box-sizing:border-box; }
+
+/* ============================================================
+   AGRANDIR UNE IMAGE (fenêtres de détail)
+   ============================================================ */
+.dw-gal img, .dw-panel img{ cursor:zoom-in; }
+.zm{ position:fixed; inset:0; z-index:600; display:flex; align-items:center; justify-content:center; gap:14px; padding:56px 16px 24px; background:rgba(7,15,38,.82); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); animation:zm-in .25s ease; cursor:zoom-out; }
+@keyframes zm-in{ from{ opacity:0; } }
+.zm-fig{ margin:0; max-width:min(1200px, 100%); max-height:100%; display:flex; flex-direction:column; align-items:center; gap:12px; cursor:default; }
+.zm-fig img{ max-width:100%; max-height:calc(100svh - 140px); object-fit:contain; border-radius:16px; background:#fff; box-shadow:0 30px 70px rgba(0,0,0,.45); }
+.zm-fig figcaption{ color:rgba(255,255,255,.88); font-size:15px; text-align:center; max-width:60ch; }
+.zm-x{ all:unset; cursor:pointer; position:absolute; top:14px; right:16px; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:26px; line-height:1; color:#0d1f45; background:#fff; }
+.zm-nav{ all:unset; cursor:pointer; flex:none; width:46px; height:46px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.95); color:#0d1f45; }
+.zm-nav .ar svg{ width:16px; height:16px; }
+.zm-x:focus-visible, .zm-nav:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+@media(max-width:560px){
+  .zm{ padding:60px 10px 20px; flex-direction:column; }
+  .zm-nav{ position:absolute; bottom:18px; } .zm-prev{ left:calc(50% - 56px); } .zm-next{ left:calc(50% + 10px); }
+  .zm-fig img{ max-height:calc(100svh - 190px); }
+}
+@media(prefers-reduced-motion:reduce){ .zm{ animation:none; } }
+@media(max-width:560px){ .zm{ padding-bottom:86px; } .zm-fig img{ max-height:calc(100svh - 240px); } .zm-fig figcaption{ font-size:14px; } }
+
+/* Galeries : grille de 6 colonnes. Une image normale prend un tiers, « half » la moitié, « wide » toute la ligne.
+   Les captures de téléphone gardent leur format sans être coupées. */
+.dw-gal.dw-gal--grid{ grid-template-columns:repeat(6, minmax(0, 1fr)); }
+.dw-gal--grid figure{ grid-column:span 2; }
+.dw-gal--grid figure.is-half{ grid-column:span 3; }
+.dw-gal--grid figure.is-wide{ grid-column:1 / -1; }
+.dw-gal--grid figure img{ aspect-ratio:4 / 3; object-fit:cover; padding:0; }
+.dw-gal--grid figure.is-contain img{ aspect-ratio:3 / 4; object-fit:contain; padding:14px 10px; box-sizing:border-box; }
+.dw-gal--grid figure.is-half img{ aspect-ratio:16 / 10; object-fit:contain; background:#fff; }
+.dw-gal--grid figure.is-half.is-contain img{ aspect-ratio:16 / 10; object-fit:contain; padding:10px; }
+.dw-gal--grid figure.is-wide img{ aspect-ratio:auto; object-fit:contain; }
+@media(max-width:760px){
+  .dw-gal.dw-gal--grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .dw-gal--grid figure{ grid-column:span 1; }
+  .dw-gal--grid figure.is-half, .dw-gal--grid figure.is-wide{ grid-column:1 / -1; }
+}
+
+/* Croix de fermeture : icône centrée */
+.zm-x, .cvc-x{ font-size:0; }
+.zm-x svg, .cvc-x svg{ width:18px; height:18px; display:block; }
