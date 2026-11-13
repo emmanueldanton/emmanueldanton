@@ -898,13 +898,3 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
-/* l'écran de chargement s'efface une fois le site affiché */
-(function() {
-  var l = document.getElementById("loader");
-  if (!l) return;
-  requestAnimationFrame(function() { requestAnimationFrame(function() {
-    l.classList.add("is-done");
-    setTimeout(function() { if (l.parentNode) l.parentNode.removeChild(l); }, 700);
-  }); });
-})();
