@@ -1865,4 +1865,9 @@ a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
 }
 
 /* Texte de secours pour les robots et l'affichage sans JavaScript (remplacé par le site dès qu'il se charge) */
-.seo-static{ max-width:720px; margin:120px auto; padding:0 24px; font-family:var(--body); }
+
+/* Galeries : une capture de téléphone garde son format, un tableau de bord large prend deux colonnes */
+.dw-gal--3 .is-contain img{ aspect-ratio:3 / 4; }
+.dw-gal--2 figure:first-child:has(img[src*="hupple-tableau"]){ grid-column:1 / -1; }
+.dw-gal img[src*="hupple-tableau"]{ aspect-ratio:auto; }
+.dw-gal--3 img{ aspect-ratio:3 / 4; object-fit:contain; padding:14px 10px; box-sizing:border-box; }

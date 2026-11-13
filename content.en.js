@@ -19,7 +19,7 @@ window.PORTFOLIO_I18N.en = {
     about: {
       quote: "My common thread: understand a need, analyse the data and <strong>take action</strong>.",
       p1: "I am a Data & AI engineering student at <strong>ECE Paris</strong> and a work-study Junior Project Manager at <strong>Ipsos BVA</strong>, in the <strong>Customer Experience & Platforms</strong> team.",
-      p2: "My path has led me to work on very different subjects. At <strong>CAD.42</strong>, I worked on data analysis and visualisation to answer operational problems, with a dashboard that tracks more than 1,200 IoT sensors across about a hundred construction sites. I am also building <strong>Hupple Store</strong>, an e-commerce shop for French-speaking Africa, where I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting. It is <strong>my playground</strong>: it lets me test, measure and adjust my decisions based on real data, over 361 sales so far.",
+      p2: "My path has led me to work on very different subjects. At <strong>CAD.42</strong>, I worked on data analysis and visualisation to answer operational problems, with a dashboard that tracks more than 1,200 IoT sensors across about a hundred construction sites. I am also building <strong>Hupple Store</strong>, an e-commerce shop for French-speaking Africa, where I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting. It is <strong>my playground</strong>: it lets me test, measure and adjust my decisions based on real data, across more than 360 sales.",
       p3: "Today, at Ipsos BVA, I am building my skills in project management, coordination and understanding client needs. Originally from Cotonou, Benin, I have also worked in international teams in Belgium and Spain. In the long run, I want to bring these experiences together to work on projects <em>at the crossroads of data, AI and business</em>.",
       chips: [
         { label: "Location", value: "Paris, France" },
@@ -148,13 +148,13 @@ window.PORTFOLIO_I18N.en = {
       {
         client: "My business - since Feb. 2026",
         title: "Hupple Store, e-commerce data",
-        desc: "An e-commerce shop for French-speaking Africa that I am building on my own. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, with orders automated in n8n. 361 sales and 321 customers so far.",
+        desc: "An e-commerce shop for French-speaking Africa that I am building on my own. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, with orders automated in n8n. More than 360 sales and 320 customers.",
         tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
         media: [{ alt: "Home page of the Hupple Store shop, with its three featured bundles" }],
         detail: {
           brief: "I launched Hupple Store to sell digital guides in French-speaking Africa, on a limited advertising budget. Orders had to process themselves and every decision had to rest on numbers. It is also my playground: it lets me test, measure and adjust my decisions based on real data.",
           role: "Founder. I handle acquisition, advertising campaigns, performance analysis, product strategy and copywriting, as well as the automations.",
-          result: "361 sales and 321 customers, mostly in 14 African countries.",
+          result: "More than 360 sales and 320 customers, mostly in 14 African countries.",
           steps: [
             { title: "Bringing in the right customers", desc: "I launch and manage Meta ad campaigns, country by country, and write the copy for the ads and product pages." },
             { title: "Automating the orders", desc: "Webhooks and n8n workflows process every order, follow up abandoned carts and keep the data up to date." },
@@ -162,6 +162,10 @@ window.PORTFOLIO_I18N.en = {
             { title: "Adjusting", desc: "A daily dashboard shows me conversion and revenue per product; I adjust prices, offers and campaigns based on these numbers." },
           ],
           facts: [{ k: "sales" }, { k: "customers" }, { k: "African countries" }],
+          gallery: [
+            { alt: "Hupple Store sales tracking dashboard: sales per month, share of sales by country, purchase hours", cap: "My sales tracking dashboard (real data, in volumes and percentages)" },
+            { alt: "Home page of the Hupple Store shop", cap: "The online shop" },
+          ],
         },
       },
       {
@@ -184,6 +188,7 @@ window.PORTFOLIO_I18N.en = {
           gallery: [
             { alt: "MyFinanx dashboard on desktop, with demo data", cap: "The dashboard on desktop (demo data)" },
             { alt: "MyFinanx on a phone, with demo data", cap: "The same app on a phone" },
+            { alt: "The MyFinanx AI advisor answering a budget question, with demo data", cap: "The AI advisor, answering from the budget (demo data)" },
           ],
         },
       },

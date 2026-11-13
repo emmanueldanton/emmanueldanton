@@ -17,7 +17,7 @@ window.PORTFOLIO = {
     tags: {
       poste: { v: "Chef de projet junior", k: "Ipsos BVA - expérience client" },
       capteurs: "1 200+ capteurs IoT suivis",
-      ventes: { v: "361", k: "ventes - Hupple Store" },
+      ventes: { v: "360+", k: "ventes - Hupple Store" },
     },
   },
 
@@ -25,14 +25,14 @@ window.PORTFOLIO = {
 
   stats: [
     { num: "03",   u: "",   lbl: "expériences en entreprise" },
-    { num: "361",  u: "",   lbl: "ventes sur ma boutique Hupple Store" },
+    { num: "360",  u: "+",   lbl: "ventes sur ma boutique Hupple Store" },
     { num: "1200", u: "+",  lbl: "capteurs IoT suivis en temps réel" },
   ],
 
   about: {
     quote: "Mon fil conducteur : comprendre un besoin, analyser les données et <strong>passer à l'action</strong>.",
     p1: "Je suis étudiant en cycle ingénieur Data & IA à l'<strong>ECE Paris</strong> et alternant chef de projet junior chez <strong>Ipsos BVA</strong>, au sein de l'équipe <strong>Expérience Client & Plateformes</strong>.",
-    p2: "Mon parcours m'a permis de travailler sur des sujets très différents. Chez <strong>CAD.42</strong>, j'ai travaillé sur l'analyse et la visualisation de données pour répondre à des problématiques opérationnelles, avec un tableau de bord qui suit plus de 1 200 capteurs IoT sur une centaine de chantiers. Je développe également <strong>Hupple Store</strong>, une boutique e-commerce destinée à l'Afrique francophone, où je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting. C'est <strong>mon terrain de jeu</strong> : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles, sur 361 ventes à ce jour.",
+    p2: "Mon parcours m'a permis de travailler sur des sujets très différents. Chez <strong>CAD.42</strong>, j'ai travaillé sur l'analyse et la visualisation de données pour répondre à des problématiques opérationnelles, avec un tableau de bord qui suit plus de 1 200 capteurs IoT sur une centaine de chantiers. Je développe également <strong>Hupple Store</strong>, une boutique e-commerce destinée à l'Afrique francophone, où je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting. C'est <strong>mon terrain de jeu</strong> : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles, sur plus de 360 ventes.",
     p3: "Aujourd'hui, chez Ipsos BVA, je développe davantage mes compétences en gestion de projet, en coordination et en compréhension des besoins clients. Originaire de Cotonou, au Bénin, j'ai aussi travaillé en équipe internationale en Belgique et en Espagne. À terme, je souhaite réunir ces expériences pour travailler sur des projets <em>à l'intersection de la Data, de l'IA et du business</em>.",
     chips: [
       { label: "Localisation",  value: "Paris, Île-de-France" },
@@ -225,7 +225,7 @@ window.PORTFOLIO = {
       pn: "02",
       client: "Mon entreprise - depuis fév. 2026",
       title: "Hupple Store, data e-commerce",
-      desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. 361 ventes et 321 clients à ce jour.",
+      desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. Plus de 360 ventes et 320 clients.",
       tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
       media: [
         { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store, avec ses trois packs en vedette" },
@@ -235,7 +235,7 @@ window.PORTFOLIO = {
       detail: {
         brief: "J'ai lancé Hupple Store pour vendre des guides numériques en Afrique francophone, avec un budget publicitaire limité. Il fallait que les commandes se traitent seules et que chaque décision repose sur des chiffres. C'est aussi mon terrain de jeu : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles.",
         role: "Fondateur. Je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, ainsi que les automatisations.",
-        result: "361 ventes et 321 clients, surtout dans 14 pays africains.",
+        result: "Plus de 360 ventes et 320 clients, surtout dans 14 pays africains.",
         steps: [
           { n: "01", title: "Attirer les bons clients", desc: "Je lance et pilote les campagnes publicitaires Meta, pays par pays, et j'écris les textes des annonces et des pages produits." },
           { n: "02", title: "Automatiser les commandes", desc: "Des webhooks et des workflows n8n traitent chaque commande, relancent les paniers abandonnés et gardent les données à jour." },
@@ -243,9 +243,13 @@ window.PORTFOLIO = {
           { n: "04", title: "Ajuster", desc: "Un tableau de bord quotidien me montre la conversion et les revenus par produit ; j'ajuste les prix, les offres et les campagnes à partir de ces chiffres." },
         ],
         facts: [
-          { v: "361", k: "ventes" },
-          { v: "321", k: "clients" },
+          { v: "360+", k: "ventes" },
+          { v: "320+", k: "clients" },
           { v: "14", k: "pays africains" },
+        ],
+        gallery: [
+          { src: "assets/projets/hupple-tableau.jpg", alt: "Tableau de bord de suivi des ventes de Hupple Store : ventes par mois, part des ventes par pays, heures d'achat", cap: "Mon tableau de bord de suivi des ventes (données réelles, en volumes et en pourcentages)" },
+          { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store", cap: "La boutique en ligne" },
         ],
       },
     },
@@ -278,6 +282,7 @@ window.PORTFOLIO = {
         gallery: [
           { src: "assets/projets/myfinanx-desktop.jpg", alt: "Tableau de bord de MyFinanx sur ordinateur, avec des données de démonstration", cap: "Le tableau de bord sur ordinateur (données de démonstration)" },
           { src: "assets/projets/myfinanx-mobile.jpg", alt: "MyFinanx sur téléphone, avec des données de démonstration", cap: "La même application sur téléphone", contain: true },
+          { src: "assets/projets/myfinanx-ia.jpg", alt: "Le conseiller IA de MyFinanx répond à une question sur le budget, avec des données de démonstration", cap: "Le conseiller IA, qui répond à partir du budget (données de démonstration)", contain: true },
         ],
       },
     },
