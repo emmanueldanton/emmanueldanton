@@ -81,20 +81,20 @@ window.PORTFOLIO = {
       role: "Data Analyst",
       co: "CAD.42 Services - Rueil-Malmaison",
       bullets: [
-        "J'ai déployé un tableau de bord temps réel pour 1 200+ capteurs IoT sur 100+ chantiers",
-        "J'ai créé des scores de santé par projet pour anticiper les pannes sur le terrain",
-        "J'ai formé 5 collaborateurs et accompagné l'adoption de Claude",
+        "1 200+ capteurs suivis en direct sur 100+ chantiers, grâce au tableau de bord que j'ai déployé",
+        "Les pannes anticipées sur le terrain, grâce à un score de santé par projet",
+        "5 collaborateurs formés à l'outil, et Claude adopté par la Direction des Opérations",
       ],
       tags: ["Python", "Dash", "Node.js", "IoT", "API", "LLM Claude", "Power BI"],
       detail: {
-        brief: "CAD.42 suit des chantiers de construction grâce à des capteurs connectés. Il manquait un outil pour voir, en direct, l'état de plus de 1 200 capteurs répartis sur plus de 100 chantiers.",
+        brief: "Les équipes de CAD.42 voient désormais en direct l'état de plus de 1 200 capteurs, sur plus de 100 chantiers. Avant, aucun outil ne le permettait.",
         role: "Data Analyst en stage. J'ai pensé l'organisation des données, développé le tableau de bord, puis je l'ai mis en service et j'ai formé les équipes.",
         result: "Le tableau de bord tourne en production. Cinq collaborateurs l'utilisent après formation, et la Direction des Opérations a adopté Claude dans son travail.",
         steps: [
-          { n: "01", title: "Faire remonter les données", desc: "J'ai construit la collecte des données des capteurs par API, puis leur nettoyage et leur stockage, pour que l'écran se mette à jour en continu." },
-          { n: "02", title: "Le tableau de bord en Python", desc: "J'ai développé avec Dash un tableau de bord qui montre les capteurs chantier par chantier, avec des alertes automatiques et un score de santé par projet." },
-          { n: "03", title: "Le passage à Node.js", desc: "J'ai migré l'outil vers Node.js pour qu'il reste rapide en temps réel sur plus de 100 chantiers à la fois." },
-          { n: "04", title: "Former et accompagner", desc: "J'ai formé cinq collaborateurs à l'outil, puis j'ai accompagné la Direction des Opérations dans l'adoption de Claude." },
+          { n: "01", title: "Un écran toujours à jour", desc: "J'ai construit la collecte des données des capteurs par API, leur nettoyage et leur stockage. Ce qui veut dire que l'écran se met à jour seul, en continu." },
+          { n: "02", title: "Voir les problèmes avant qu'ils arrivent", desc: "J'ai développé avec Dash un tableau de bord chantier par chantier, avec des alertes automatiques et un score de santé par projet, pour intervenir avant la panne." },
+          { n: "03", title: "Rester rapide à grande échelle", desc: "J'ai migré l'outil vers Node.js. Résultat : il reste rapide, même avec plus de 100 chantiers suivis en même temps." },
+          { n: "04", title: "Une équipe autonome", desc: "J'ai formé cinq collaborateurs à l'outil, puis j'ai accompagné la Direction des Opérations dans l'adoption de Claude." },
         ],
         facts: [
           { v: "1 200+", k: "capteurs suivis en direct" },
@@ -111,19 +111,19 @@ window.PORTFOLIO = {
       role: "Data Analyst & Product Management",
       co: "InspiraTec - Courbevoie",
       bullets: [
-        "J'ai développé le MVP d'une plateforme de recrutement tech, avec un matching automatisé sous n8n",
-        "J'ai automatisé la collecte de 50+ offres et profils qualifiés par jour",
-        "J'ai tout réuni dans un tableau de bord Power BI pour aider à décider",
+        "50+ offres et profils qualifiés collectés chaque jour, sans saisie à la main",
+        "Un MVP qui rapproche seul offres et candidats, construit avec n8n",
+        "Un tableau de bord Power BI pour que l'équipe commerciale décide sur des chiffres",
       ],
       tags: ["Power BI", "n8n", "Web Scraping", "SQL", "Supabase", "API"],
       detail: {
-        brief: "InspiraTec est une startup de recrutement tech. Elle voulait une plateforme capable de rapprocher automatiquement les offres et les candidats. Tout était à construire, à commencer par les données.",
+        brief: "InspiraTec a obtenu une plateforme qui rapproche seule les offres et les candidats, alimentée chaque jour par plus de 50 offres et profils qualifiés. Cette startup de recrutement tech partait de zéro, à commencer par les données.",
         role: "Data Analyst et Product Management. Je collectais les données, je construisais les automatisations et le tableau de bord, et je faisais le lien avec le produit.",
         result: "Un MVP qui fonctionne, plus de 50 offres et profils qualifiés collectés chaque jour, et un tableau de bord Power BI utilisé par l'équipe commerciale.",
         steps: [
-          { n: "01", title: "Collecter les offres", desc: "J'ai automatisé la collecte sur les principales plateformes d'emploi tech, avec un tri pour ne garder que les offres et les profils qualifiés." },
-          { n: "02", title: "Automatiser le matching", desc: "J'ai construit des workflows n8n qui rapprochent offres et candidats, leur donnent un score et préviennent l'équipe." },
-          { n: "03", title: "Ranger les données", desc: "J'ai conçu la base Supabase qui réunit les offres, les candidats et les scores." },
+          { n: "01", title: "Des offres qui arrivent seules", desc: "J'ai automatisé la collecte sur les principales plateformes d'emploi tech, avec un tri. Ce qui veut dire que l'équipe ne reçoit que des offres et des profils qualifiés." },
+          { n: "02", title: "Le bon candidat pour la bonne offre", desc: "J'ai construit des workflows n8n qui rapprochent offres et candidats, leur donnent un score et préviennent l'équipe." },
+          { n: "03", title: "Tout au même endroit", desc: "J'ai conçu la base Supabase qui réunit les offres, les candidats et les scores." },
           { n: "04", title: "Aider à décider", desc: "J'ai réuni les indicateurs dans un tableau de bord Power BI pour l'équipe commerciale." },
         ],
         facts: [
@@ -138,38 +138,38 @@ window.PORTFOLIO = {
 
   skills: [
     {
-      n: "01", t: "Langages & Analyse",
-      d: "Python tous les jours, avec Pandas et Scikit-learn. SQL pour interroger proprement, Node.js quand il faut du temps réel, comme pour le tableau de bord de CAD.42.",
+      n: "01", t: "Faire parler les données",
+      d: "Je transforme des données brutes en réponses claires. Chez CAD.42, l'état de plus de 1 200 capteurs se lisait d'un coup d'œil. Python et SQL au quotidien, Node.js quand il faut du temps réel.",
       tags: ["Python", "SQL", "Node.js", "Machine Learning", "Data Visualisation"],
     },
     {
-      n: "02", t: "Business Intelligence",
-      d: "Je construis des tableaux de bord qu'on ouvre vraiment. Chez InspiraTec, l'équipe commerciale suivait ses offres dans Power BI ; chez CAD.42, les chantiers se lisaient dans Dash.",
+      n: "02", t: "Rendre les chiffres lisibles",
+      d: "Des tableaux de bord qu'une équipe ouvre vraiment pour décider. Chez InspiraTec, l'équipe commerciale suivait ses offres dans Power BI ; chez CAD.42, cinq collaborateurs suivaient leurs chantiers en direct.",
       tags: ["Power BI", "Dash", "Streamlit", "KPI", "Data Modeling", "Excel avancé"],
     },
     {
-      n: "03", t: "Data Engineering & Cloud",
-      d: "Je fais circuler la donnée de la source jusqu'au tableau de bord : collecte par API, stockage en PostgreSQL ou Supabase, le tout rangé dans Docker.",
+      n: "03", t: "Faire arriver la bonne donnée",
+      d: "Les données arrivent seules, propres et à jour, là où on en a besoin. Chez CAD.42, l'écran se mettait à jour en continu sur plus de 100 chantiers. Derrière : des API, une base PostgreSQL ou Supabase, Docker.",
       tags: ["PostgreSQL", "MongoDB", "GCP", "Docker", "ETL", "API REST", "Supabase"],
     },
     {
-      n: "04", t: "Automatisation & IA",
-      d: "Tout ce qui se répète, j'essaie de l'automatiser. Des workflows n8n pour les commandes de ma boutique, du scraping chez InspiraTec, Claude pour aller plus vite sur le reste.",
+      n: "04", t: "Faire gagner du temps",
+      d: "Ce qui se répète, je le confie à la machine. Sur Hupple Store, chaque commande se traite seule ; chez InspiraTec, plus de 50 offres et profils arrivaient chaque jour sans saisie à la main.",
       tags: ["n8n", "Web Scraping", "Prompt Engineering", "Claude (LLM)", "NLP"],
     },
     {
-      n: "05", t: "Product & Web Analytics",
-      d: "Je regarde où les visiteurs décrochent avant d'acheter. Sur Hupple Store, je suis chaque étape, de la publicité Meta jusqu'au paiement.",
+      n: "05", t: "Comprendre ce qui fait acheter",
+      d: "Je repère où les visiteurs décrochent avant d'acheter, puis j'ajuste. Sur Hupple Store, plus de 360 ventes, avec des prix, des offres et des publicités corrigés à partir des chiffres.",
       tags: ["Meta Ads", "Funnel Analytics", "Analyse de conversion", "Webhooks", "KPI"],
     },
     {
-      n: "06", t: "Design & Graphisme",
-      d: "Des interfaces, des visuels et des graphiques soignés, parce qu'un outil bien présenté est un outil qu'on utilise.",
+      n: "06", t: "Donner envie d'utiliser un outil",
+      d: "Un outil bien présenté est un outil qu'on utilise. Je dessine moi-même les interfaces, les visuels et les graphiques de mes projets, de MyFinanx aux publicités de Hupple Store.",
       tags: ["Suite Adobe", "Design graphique", "Dataviz", "UI"],
     },
     {
-      n: "07", t: "Outils & Méthodes",
-      d: "Git pour ne rien perdre, des méthodes agiles pour avancer par petites étapes, et Medallia, que j'utilise au quotidien chez Ipsos.",
+      n: "07", t: "Avancer en équipe sans rien perdre",
+      d: "Un travail suivi et documenté, pour qu'un collègue puisse le reprendre sans moi. J'avance par petites étapes, et j'utilise Medallia au quotidien chez Ipsos BVA.",
       tags: ["Git", "GitHub", "Lovable", "Agile/Scrum", "Bitbucket", "Docker", "Medallia"],
     },
   ],
@@ -191,8 +191,8 @@ window.PORTFOLIO = {
     {
       pn: "01",
       client: "Erasmus+ - Université de Saragosse - juillet 2026",
-      title: "CaRental, réduire les coûts sans faire attendre",
-      desc: "Projet Erasmus+ à l'Université de Saragosse. Une agence de location d'aéroport voulait savoir quelle flotte de navettes coûte le moins cher tout en gardant au moins 85 % de clients satisfaits. En équipe internationale de quatre, nous avons simulé plus de 100 scénarios pour aboutir à une configuration à 6,54 € par client.",
+      title: "CaRental, 6,54 € par client avec 85 % de clients satisfaits",
+      desc: "La flotte de navettes la moins chère qui garde au moins 85 % de clients satisfaits : 6,54 € par client. Nous l'avons trouvée en comparant plus de 100 scénarios, en équipe internationale de quatre, pour une agence de location d'aéroport. Projet Erasmus+ à l'Université de Saragosse.",
       tags: ["JaamSim", "Simulation", "Python", "Optimisation", "Anglais"],
       media: [
         { src: "assets/projets/carental-resultats.jpg", alt: "Diapositive de résultats : compromis entre coût et qualité de service pour chaque scénario" },
@@ -200,14 +200,14 @@ window.PORTFOLIO = {
       ],
       url: null,
       detail: {
-        brief: "Une agence de location de voitures d'aéroport cherchait la flotte de navettes la moins coûteuse capable de garder au moins 85 % de clients satisfaits.",
+        brief: "Nous avons trouvé la flotte de navettes la moins chère qui garde au moins 85 % de clients satisfaits : 6,54 € par client. La question venait d'une agence de location de voitures d'aéroport.",
         role: "Au sein d'une équipe internationale de quatre personnes, j'ai pris en charge l'analyse des données et la présentation des résultats.",
         result: "Après plus de 100 scénarios comparés, nous avons recommandé une configuration à 6,54 € par client, présentée en anglais à l'Université de Saragosse.",
         steps: [
-          { n: "01", title: "Poser le problème", desc: "Nous avons traduit la question de l'agence en objectif chiffré : le coût par client le plus bas, avec au moins 85 % de clients satisfaits." },
-          { n: "02", title: "Simuler le service", desc: "Nous avons modélisé les navettes et le comptoir de location dans JaamSim, un logiciel de simulation." },
-          { n: "03", title: "Comparer les scénarios", desc: "J'ai analysé en Python plus de 100 configurations pour trouver le meilleur compromis entre coût et qualité de service." },
-          { n: "04", title: "Présenter en anglais", desc: "J'ai présenté les résultats et notre recommandation devant le jury du programme." },
+          { n: "01", title: "Un objectif chiffré", desc: "Nous avons traduit la question de l'agence en objectif chiffré : le coût par client le plus bas, avec au moins 85 % de clients satisfaits." },
+          { n: "02", title: "Tester sans risque", desc: "Nous avons reproduit les navettes et le comptoir de location dans JaamSim, un logiciel de simulation. Ce qui veut dire qu'on pouvait tout essayer sans toucher à la vraie agence." },
+          { n: "03", title: "Trouver le meilleur compromis", desc: "J'ai analysé en Python plus de 100 configurations pour trouver le meilleur compromis entre coût et qualité de service." },
+          { n: "04", title: "Convaincre le jury", desc: "J'ai présenté en anglais les résultats et notre recommandation devant le jury du programme." },
         ],
         facts: [
           { v: "100+", k: "scénarios simulés" },
@@ -224,8 +224,8 @@ window.PORTFOLIO = {
     {
       pn: "02",
       client: "Projet personnel - depuis fév. 2026",
-      title: "Hupple Store, data e-commerce",
-      desc: "Boutique e-commerce destinée à l'Afrique francophone, que je développe seul. J'y gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, avec des commandes automatisées sous n8n. Plus de 360 ventes et 320 clients.",
+      title: "Hupple Store, plus de 360 ventes dans 14 pays",
+      desc: "Plus de 360 ventes et 320 clients dans 14 pays africains. Hupple Store est une boutique de guides numériques que je développe seul : publicité, analyse des performances, offres, textes et commandes automatisées.",
       tags: ["n8n", "Webhooks", "KPI", "E-commerce", "Design"],
       media: [
         { src: "assets/projets/hupple.jpg", alt: "Page d'accueil de la boutique Hupple Store, avec ses trois packs en vedette" },
@@ -233,14 +233,14 @@ window.PORTFOLIO = {
       url: "https://hupplemarket.mychariow.com",
       logo: "assets/hupple-logo.png",
       detail: {
-        brief: "J'ai lancé Hupple Store pour vendre des guides numériques en Afrique francophone, avec un budget publicitaire limité. Il fallait que les commandes se traitent seules et que chaque décision repose sur des chiffres. C'est aussi mon terrain de jeu : cela me permet de tester, mesurer et ajuster mes décisions à partir de données réelles.",
+        brief: "Plus de 360 ventes et 320 clients dans 14 pays africains, avec un budget publicitaire limité. Les commandes se traitent seules et chaque décision repose sur des chiffres. C'est aussi mon terrain de jeu : je teste, je mesure et j'ajuste à partir de données réelles.",
         role: "Un projet que je mène seul. Je gère l'acquisition, les campagnes publicitaires, l'analyse des performances, la stratégie produit et le copywriting, ainsi que les automatisations.",
         result: "Plus de 360 ventes et 320 clients, surtout dans 14 pays africains.",
         steps: [
           { n: "01", title: "Attirer les bons clients", desc: "Je lance et pilote les campagnes publicitaires Meta, pays par pays, et j'écris les textes des annonces et des pages produits." },
-          { n: "02", title: "Automatiser les commandes", desc: "Des webhooks et des workflows n8n traitent chaque commande, relancent les paniers abandonnés et gardent les données à jour." },
-          { n: "03", title: "Mesurer chaque étape", desc: "Je suis le parcours de la publicité jusqu'au paiement pour voir où les visiteurs décrochent et ce que rapporte chaque produit." },
-          { n: "04", title: "Ajuster", desc: "Un tableau de bord quotidien me montre la conversion et les revenus par produit ; j'ajuste les prix, les offres et les campagnes à partir de ces chiffres." },
+          { n: "02", title: "Des commandes qui se traitent seules", desc: "Des webhooks et des workflows n8n traitent chaque commande et relancent les paniers abandonnés. Ce qui veut dire que le client reçoit ses guides sans attendre, même la nuit." },
+          { n: "03", title: "Voir où les clients décrochent", desc: "Je suis le parcours de la publicité jusqu'au paiement pour voir où les visiteurs décrochent et ce que rapporte chaque produit." },
+          { n: "04", title: "Décider sur des chiffres", desc: "Un tableau de bord quotidien me montre la conversion et les revenus par produit ; j'ajuste les prix, les offres et les campagnes à partir de ces chiffres." },
         ],
         facts: [
           { v: "360+", k: "ventes" },
@@ -257,8 +257,8 @@ window.PORTFOLIO = {
     {
       pn: "03",
       client: "Projet personnel - 2026",
-      title: "MyFinanx, gestion financière",
-      desc: "Application de budget que j'ai conçue et développée seul. Le besoin : suivre ses dépenses sans créer de compte ni confier ses données. Elle s'installe sur téléphone, propose des conseils par IA et lit les tickets de caisse.",
+      title: "MyFinanx, son budget sans donner ses données",
+      desc: "Suivre ses dépenses sans créer de compte ni confier ses données. MyFinanx est une application de budget que j'ai conçue et développée seul : elle s'installe sur téléphone, donne des conseils par IA et lit les tickets de caisse.",
       tags: ["PWA", "JavaScript", "Vite", "IA", "Scan de tickets"],
       media: [
         { src: "assets/projets/myfinanx-desktop.jpg", alt: "Tableau de bord de MyFinanx sur ordinateur, avec des données de démonstration" },
@@ -266,14 +266,14 @@ window.PORTFOLIO = {
       ],
       url: "https://myfinanx.vercel.app",
       detail: {
-        brief: "Les applications de budget demandent souvent un compte et gardent tout sur leurs serveurs. MyFinanx permet de suivre son budget sans donner ses données.",
+        brief: "Avec MyFinanx, on suit son budget sans créer de compte : les données restent sur le téléphone. Les autres applications de budget gardent souvent tout sur leurs serveurs.",
         role: "J'ai mené le projet de bout en bout, de la conception à la mise en ligne.",
-        result: "L'application est en ligne et gratuite, et les données restent sur l'appareil.",
+        result: "Une application en ligne et gratuite, où l'on suit son budget sans rien saisir à la main ni donner ses données.",
         steps: [
-          { n: "01", title: "Partir de l'usage", desc: "J'ai conçu une application installable, pensée d'abord pour le téléphone." },
-          { n: "02", title: "Garder les données chez soi", desc: "Aucun compte à créer : les données de budget restent chez l'utilisateur." },
-          { n: "03", title: "Des conseils par IA", desc: "J'ai intégré un modèle de langage qui commente le budget et propose des pistes d'économie." },
-          { n: "04", title: "Le scan de tickets", desc: "L'application lit les tickets de caisse et les relevés PDF, pour éviter la saisie à la main." },
+          { n: "01", title: "Toujours dans la poche", desc: "J'ai conçu une application qui s'installe comme une vraie application, pensée d'abord pour le téléphone." },
+          { n: "02", title: "Des données qui restent chez soi", desc: "Aucun compte à créer : les données de budget restent chez l'utilisateur." },
+          { n: "03", title: "Des pistes pour économiser", desc: "J'ai intégré une IA qui commente le budget et propose des pistes d'économie." },
+          { n: "04", title: "Plus de saisie à la main", desc: "L'application lit les tickets de caisse et les relevés PDF, pour éviter la saisie à la main." },
         ],
         facts: [
           { v: "0", k: "compte à créer" },
@@ -294,8 +294,8 @@ window.PORTFOLIO = {
     {
       pn: "04",
       client: "International - avril 2025, Belgique",
-      title: "Football analytics, OHL",
-      desc: "Lors de la BUSIT Week de l'UC Leuven-Limburg, en Belgique, j'ai analysé avec une équipe internationale les données de performance du club OH Leuven, puis nous avons présenté nos recommandations à un panel d'experts du club.",
+      title: "Football OHL, une saison de matchs traduite en conseils",
+      desc: "Des recommandations sur le recrutement, le jeu et la charge physique, présentées aux experts du club OH Leuven. Nous les avons tirées d'une saison complète de données, en équipe internationale, pendant la BUSIT Week de l'UC Leuven-Limburg en Belgique.",
       tags: ["Python", "Pandas", "Seaborn", "SQL", "Anglais"],
       layout: "duo",
       media: [
@@ -304,14 +304,14 @@ window.PORTFOLIO = {
       ],
       url: null,
       detail: {
-        brief: "Pendant la BUSIT Week de l'UC Leuven-Limburg, le club de football OH Leuven nous a confié ses données de performance, avec une question : qu'en tirer pour le recrutement, le jeu et la gestion de la charge physique ?",
+        brief: "Nous avons présenté aux experts du club OH Leuven des recommandations sur le recrutement, le jeu et la charge physique des joueurs, tirées d'une saison complète de données. C'était pendant la BUSIT Week de l'UC Leuven-Limburg, en Belgique.",
         role: "Au sein d'une équipe internationale de cinq personnes, j'ai construit les indicateurs et les graphiques qui rendent les résultats lisibles.",
         result: "Nous avons présenté des recommandations concrètes devant des experts du club, à partir d'une saison complète de données de matchs et de joueurs.",
         steps: [
-          { n: "01", title: "Explorer les données", desc: "Nous avons parcouru le jeu de données du club : statistiques des joueurs, données de match, mesures physiques et tactiques sur une saison." },
-          { n: "02", title: "Construire les indicateurs", desc: "J'ai combiné plusieurs mesures pour évaluer l'apport de chaque joueur : buts attendus, intensité du pressing, réseaux de passes, travail défensif." },
-          { n: "03", title: "Rendre lisible", desc: "J'ai produit des graphiques, fixes et interactifs, avec Seaborn et Matplotlib, pour expliquer les résultats à des personnes qui ne sont pas techniques." },
-          { n: "04", title: "Présenter au club", desc: "Nous avons présenté en anglais nos recommandations sur le recrutement, les schémas tactiques et la gestion de la charge physique." },
+          { n: "01", title: "Comprendre la saison", desc: "Nous avons parcouru le jeu de données du club : statistiques des joueurs, données de match, mesures physiques et tactiques sur une saison." },
+          { n: "02", title: "Mesurer l'apport de chaque joueur", desc: "J'ai combiné plusieurs mesures, comme les buts attendus, l'intensité du pressing ou le travail défensif. Ce qui veut dire qu'on pouvait comparer les joueurs sur ce qu'ils apportent vraiment à l'équipe." },
+          { n: "03", title: "Des graphiques que tout le monde comprend", desc: "J'ai produit des graphiques, fixes et interactifs, avec Seaborn et Matplotlib, pour expliquer les résultats à des personnes qui ne sont pas techniques." },
+          { n: "04", title: "Convaincre le club", desc: "Nous avons présenté en anglais nos recommandations sur le recrutement, les schémas tactiques et la gestion de la charge physique." },
         ],
         facts: [
           { v: "5", k: "personnes dans l'équipe" },

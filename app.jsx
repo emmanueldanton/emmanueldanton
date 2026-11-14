@@ -494,8 +494,8 @@ function DetailWindow({ aria, back, counter, color, k, title, tags, panel, d, st
         )}
 
         <div className="dw-duo">
-          <div className="dw-card"><h3>{tr("Mon rôle")}</h3><p>{d.role}</p></div>
           <div className="dw-card dw-card--k"><h3>{tr("Le résultat")}</h3><p>{d.result}</p></div>
+          <div className="dw-card"><h3>{tr("Mon rôle")}</h3><p>{d.role}</p></div>
         </div>
 
         <h3 className="dw-sub">{stepsLabel}</h3>
