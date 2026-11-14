@@ -1913,3 +1913,6 @@ a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
 /* Croix de fermeture : icône centrée */
 .zm-x, .cvc-x{ font-size:0; }
 .zm-x svg, .cvc-x svg{ width:18px; height:18px; display:block; }
+
+/* Recommandation : le titre passe sous le nom */
+.sb-quote figcaption div > span{ display:block; margin-top:2px; }
