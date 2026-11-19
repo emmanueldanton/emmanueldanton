@@ -48,7 +48,7 @@ window.PORTFOLIO = {
       yr: "Depuis sept. 2026",
       live: true,
       discret: true,
-      logo: "assets/ipsos.svg",
+      logo: "assets/ipsos-bva.png",
       ph: "Alternance",
       role: "Chef de projet junior Plateformes IT",
       co: "Ipsos BVA - Paris",

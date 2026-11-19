@@ -1916,3 +1916,8 @@ a:has(> .ar), button:has(> .ar){ white-space:nowrap; }
 
 /* Recommandation : le titre passe sous le nom */
 .sb-quote figcaption div > span{ display:block; margin-top:2px; }
+
+/* Ipsos BVA : logo officiel en paysage, la pastille prend sa forme */
+.xb-mark{ width:auto; height:auto; padding:0; overflow:hidden; border-radius:10px; }
+.xb-mark img{ width:96px; height:auto; display:block; }
+@media(max-width:1000px){ .xb-mark{ width:auto; height:auto; border-radius:8px; } .xb-mark img{ width:72px; height:auto; } }
